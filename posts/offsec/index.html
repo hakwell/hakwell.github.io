@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OffSec Writeups | Muzec</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+    <header>
+        <a href="../../index.html" class="logo">muzec@hackwell:~$</a>
+        <a href="../../index.html" class="back-btn">← Back to Home</a>
+    </header>
+
+    <div class="container">
+        <h1>OffSec Writeups</h1>
+        <p class="subtitle">Advanced penetration testing and security research</p>
+
+        <div class="writeups-grid" id="writeups"></div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="markdown-content" id="content"></div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/main.js"></script>
+    <script>
+        // OffSec writeups data
+        const writeups = [
+            { title: "OSCP Preparation", difficulty: "hard", date: "2024-01-25", file: "oscp-prep.md", preview: "Comprehensive guide for OSCP certification preparation" },
+            { title: "Active Directory Exploitation", difficulty: "hard", date: "2024-01-22", file: "ad-exploitation.md", preview: "Advanced AD attack techniques and privilege escalation" },
+            { title: "Buffer Overflow Exploitation", difficulty: "medium", date: "2024-01-20", file: "buffer-overflow.md", preview: "Stack-based buffer overflow exploitation techniques" },
+            { title: "Web Application Security", difficulty: "medium", date: "2024-01-18", file: "web-app-sec.md", preview: "Advanced web application penetration testing" },
+            { title: "Network Penetration Testing", difficulty: "hard", date: "2024-01-15", file: "network-pentest.md", preview: "Network infrastructure security assessment" },
+            { title: "Linux Privilege Escalation", difficulty: "medium", date: "2024-01-12", file: "linux-privesc.md", preview: "Advanced Linux privilege escalation techniques" },
+            { title: "Windows Privilege Escalation", difficulty: "medium", date: "2024-01-10", file: "windows-privesc.md", preview: "Windows privilege escalation and lateral movement" },
+            { title: "Cryptography Attacks", difficulty: "hard", date: "2024-01-08", file: "crypto-attacks.md", preview: "Cryptographic vulnerabilities and exploitation" }
+        ];
+
+        function renderWriteups() {
+            const grid = document.getElementById('writeups');
+            grid.innerHTML = writeups.map(w => `
+                <div class="writeup-card" onclick="loadWriteup('${w.file}')">
+                    <h3>${w.title}</h3>
+                    <span class="difficulty ${w.difficulty}">${w.difficulty.toUpperCase()}</span>
+                    <p>${w.preview}</p>
+                    <span class="date">${w.date}</span>
+                </div>
+            `).join('');
+        }
+
+        function loadWriteup(file) {
+            const modal = document.getElementById('modal');
+            const content = document.getElementById('content');
+            
+            // In production, fetch from: `/posts/offsec/${file}`
+            // For demo, showing sample markdown
+            const sampleMarkdown = `# ${file.replace('.md', '').replace('-', ' ').toUpperCase()} - OffSec
+
+## Overview
+This is a sample OffSec writeup. Replace this content by fetching your actual markdown files.
+
+## Methodology
+Description of the penetration testing methodology used...
+
+## Reconnaissance
+\`\`\`bash
+nmap -sC -sV -oN nmap.txt target.com
+\`\`\`
+
+## Vulnerability Assessment
+Description of vulnerability assessment steps...
+
+## Exploitation
+Steps to exploit identified vulnerabilities...
+
+## Post-Exploitation
+Post-exploitation activities and privilege escalation...
+
+## Reporting
+Key findings and recommendations...
+
+---
+*Add your actual writeup content here*`;
+
+            content.innerHTML = marked.parse(sampleMarkdown);
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        window.onclick = (e) => {
+            if (e.target.id === 'modal') closeModal();
+        };
+
+        renderWriteups();
+    </script>
+</body>
+</html>
