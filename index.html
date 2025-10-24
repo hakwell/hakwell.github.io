@@ -3,117 +3,586 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HackWell Blog | Cybersecurity Writeups & Research</title>
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Muzec | Cybersecurity Professional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #141d2b;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #141d2b;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(159, 239, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(159, 239, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Glowing Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: -1;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(159, 239, 0, 0.4), transparent);
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .orb2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(159, 239, 0, 0.3), transparent);
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 7s;
+        }
+
+        .orb3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(159, 239, 0, 0.35), transparent);
+            top: 50%;
+            left: 50%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(20, 29, 43, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(159, 239, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #9fef00;
+            text-shadow: 0 0 30px rgba(159, 239, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            flex-direction: row;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #9fef00;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover {
+            color: #9fef00;
+            text-shadow: 0 0 20px rgba(159, 239, 0, 0.6);
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #9fef00;
+            text-shadow: 0 0 40px rgba(159, 239, 0, 0.6);
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(159, 239, 0, 0.3);
+        }
+
+        .hero-content .description {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #c0c0c0;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #9fef00;
+            color: #141d2b;
+            box-shadow: 0 0 30px rgba(159, 239, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(159, 239, 0, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(159, 239, 0, 0.1);
+            color: #9fef00;
+            border: 2px solid #9fef00;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(159, 239, 0, 0.2);
+            box-shadow: 0 0 30px rgba(159, 239, 0, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: rgba(159, 239, 0, 0.05);
+            border: 1px solid rgba(159, 239, 0, 0.2);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(159, 239, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(159, 239, 0, 0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: #9fef00;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(159, 239, 0, 0.5);
+        }
+
+        .stat-card p {
+            color: #b0b0b0;
+            font-size: 1rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #9fef00;
+            text-shadow: 0 0 30px rgba(159, 239, 0, 0.5);
+        }
+
+        /* Platform Cards */
+        .platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .platform-card {
+            background: rgba(20, 29, 43, 0.6);
+            border: 2px solid rgba(159, 239, 0, 0.3);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(159, 239, 0, 0.1), transparent);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .platform-card:hover::before {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .platform-card:hover {
+            transform: translateY(-10px);
+            border-color: #9fef00;
+            box-shadow: 0 20px 60px rgba(159, 239, 0, 0.3);
+        }
+
+        .platform-card h3 {
+            font-size: 1.8rem;
+            color: #9fef00;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(159, 239, 0, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .platform-card p {
+            color: #c0c0c0;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Projects & Blog Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .content-card {
+            background: rgba(20, 29, 43, 0.7);
+            border: 1px solid rgba(159, 239, 0, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .content-card:hover {
+            border-color: #9fef00;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(159, 239, 0, 0.2);
+        }
+
+        .content-card h3 {
+            color: #9fef00;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .content-card .date {
+            color: #9fef00;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .content-card p {
+            color: #c0c0c0;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 14, 39, 0.9);
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: #00ff41;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
     <header>
-        <a href="index.html" class="logo">muzec@hackwell:~$</a>
+        <div class="logo">root💀hackwell:~# /</div>
         <nav>
-            <a href="#about" class="nav-link">About</a>
-            <a href="#writeups" class="nav-link">Writeups</a>
-            <a href="#contact" class="nav-link">Contact</a>
+            <a href="#home">Home</a>
+            <a href="#platforms">Hacking platforms</a>
+            <a href="#projects">Projects</a>
+            <a href="#blog">Christian Blog</a>
+            <a href="#contact">Connect</a>
         </nav>
     </header>
 
-    <div class="container">
-        <section id="hero">
-            <h1>Welcome to HackWell Blog</h1>
-            <p class="subtitle">Cybersecurity writeups, research, and learning resources</p>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Hackwell</h1>
+            <p class="subtitle">Bruce Byamungu | CRTA, ISC2, </p>
             <p class="description">
-                Explore detailed penetration testing walkthroughs, security research, and educational content 
-                covering HackTheBox, TryHackMe, OffSec, and more cybersecurity topics.
+                Hey You, Yes You, Welcome To My Cyber Security Blog. My Name is Bruce, I Post Different Hacking Tricks, Writeups, Articles, Christianity Content, Any Stuffs Related To Hacking… I’m Happy You’re Here Mate.
             </p>
-        </section>
+        <hr>
+<br>
+<img style="padding-right: 30px;" align="left"  width="400" height="300" src="https://user-images.githubusercontent.com/69868171/217498714-2b7c3e24-da81-43dd-9deb-f7911ba45415.png">
+<br>
+<p><strong>Name :</strong> <a href="#blog">Saminu Musa Saminu</a></p>
+<p><strong>Known as :</strong> <a href="#">Muzec</a></p>
+<p><strong>What Do I Do :</strong> <a href="#">CTF / Red Teaming / Penetration tester</a></p>
+<p><strong>GitHub :</strong> <a href="https://github.com/Muzec0318">github.com/Muzec0318</a></p>
+<p><strong>Twitter :</strong> <a href="https://twitter.com/muzec_saminu">twitter.com/muzec_saminu</a></p>
+<p><strong>Certifications :</strong> <a href="#">OSEP, OSCP, PNPT</a></p>
+<br clear="left">
+<br clear="left">    
 
-        <section id="writeups">
-            <h2>Writeup Categories</h2>
-            <div class="home-grid">
-                <a href="posts/hackthebox/index.html" class="category-card">
-                    <h2>HackTheBox</h2>
-                    <p>Advanced penetration testing challenges and real-world scenarios</p>
-                    <div class="category-stats">
-                        <div class="stat">
-                            <div class="stat-number">15+</div>
-                            <div class="stat-label">Writeups</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">6</div>
-                            <div class="stat-label">Difficulties</div>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="posts/tryhackme/index.html" class="category-card">
-                    <h2>TryHackMe</h2>
-                    <p>Interactive cybersecurity learning and beginner-friendly rooms</p>
-                    <div class="category-stats">
-                        <div class="stat">
-                            <div class="stat-number">25+</div>
-                            <div class="stat-label">Rooms</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">4</div>
-                            <div class="stat-label">Categories</div>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="posts/offsec/index.html" class="category-card">
-                    <h2>OffSec</h2>
-                    <p>Professional penetration testing and security research</p>
-                    <div class="category-stats">
-                        <div class="stat">
-                            <div class="stat-number">10+</div>
-                            <div class="stat-label">Articles</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">3</div>
-                            <div class="stat-label">Certifications</div>
-                        </div>
-                    </div>
-                </a>
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>BOXES</h3>
+                    <p>Solved</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Red Team</h3>
+                    <p>Operations</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Pentest</h3>
+                    <p>Expertise</p>
+                </div>
             </div>
-        </section>
+            <div class="cta-buttons">
+                <a href="#platforms" class="btn btn-primary">Explore Writeups</a>
+                <a href="https://github.com/natybrice" class="btn btn-secondary">GitHub Profile</a>
+            </div>
+        </div>
+    </section>
 
-        <section id="about">
-            <h2>About This Blog</h2>
-            <p>
-                This blog serves as a comprehensive resource for cybersecurity professionals and enthusiasts. 
-                It contains detailed writeups, research papers, and educational content covering various 
-                aspects of information security, penetration testing, and ethical hacking.
-            </p>
-            <p>
-                All content is created for educational purposes and should only be used in authorized 
-                testing environments. Always ensure you have proper permission before testing any 
-                security techniques.
-            </p>
-        </section>
+    <section id="platforms">
+        <h2 class="section-title">Hacking Platforms</h2>
+        <div class="platforms">
+            <div class="platform-card" onclick="window.location.href='./posts/hackthebox/index.html'">
+                <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box-icon lucide-box"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg> HackTheBox</h3>
+                <p>A massive hacking playground with over 1.7M members. Practice penetration testing skills on realistic machines and challenges.</p>
+            </div>
+            <div class="platform-card" onclick="window.location.href='./posts/tryhackme/index.html'">
+                <div style="display: flex; align-items: center; justify-content: center;"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Tryhackme--Streamline-Simple-Icons" height="24" width="24">
+  <desc>
+    Tryhackme Streamline Icon: https://streamlinehq.com
+  </desc>
+  
+  <path d="M10.705 0C7.54 0 4.902 2.285 4.349 5.291a4.525 4.525 0 0 0 -4.107 4.5 4.525 4.525 0 0 0 4.52 4.52h6.761a0.625 0.625 0 1 0 0 -1.25H4.761a3.273 3.273 0 0 1 -3.27 -3.27A3.273 3.273 0 0 1 6.59 7.08a0.625 0.625 0 0 0 0.7 -1.035 4.488 4.488 0 0 0 -1.68 -0.69 5.223 5.223 0 0 1 5.096 -4.104 5.221 5.221 0 0 1 5.174 4.57 4.489 4.489 0 0 0 -0.488 0.305 0.625 0.625 0 1 0 0.731 1.013 3.245 3.245 0 0 1 1.912 -0.616 3.278 3.278 0 0 1 3.203 2.61 0.625 0.625 0 0 0 1.225 -0.251 4.533 4.533 0 0 0 -4.428 -3.61 4.54 4.54 0 0 0 -0.958 0.105C16.556 2.328 13.9 0 10.705 0zm5.192 10.64a0.925 0.925 0 0 0 -0.462 0.108 0.913 0.913 0 0 0 -0.313 0.29 1.27 1.27 0 0 0 -0.175 0.427 2.39 2.39 0 0 0 -0.054 0.514c0 0.181 0.018 0.353 0.054 0.517 0.036 0.164 0.095 0.307 0.175 0.43a0.899 0.899 0 0 0 0.313 0.297c0.127 0.073 0.281 0.11 0.462 0.11 0.18 0 0.334 -0.037 0.46 -0.11a0.897 0.897 0 0 0 0.309 -0.296c0.08 -0.124 0.137 -0.267 0.173 -0.431 0.036 -0.164 0.054 -0.336 0.054 -0.517 0 -0.18 -0.018 -0.352 -0.054 -0.514a1.271 1.271 0 0 0 -0.173 -0.426 0.901 0.901 0 0 0 -0.309 -0.291 0.917 0.917 0 0 0 -0.46 -0.108zm6.486 0a0.925 0.925 0 0 0 -0.462 0.108 0.913 0.913 0 0 0 -0.313 0.29 1.27 1.27 0 0 0 -0.175 0.427 2.39 2.39 0 0 0 -0.053 0.514c0 0.181 0.017 0.353 0.053 0.517 0.036 0.164 0.095 0.307 0.175 0.43a0.899 0.899 0 0 0 0.313 0.297c0.127 0.073 0.281 0.11 0.462 0.11 0.18 0 0.334 -0.037 0.46 -0.11a0.897 0.897 0 0 0 0.31 -0.296c0.078 -0.124 0.136 -0.267 0.172 -0.431 0.036 -0.164 0.054 -0.336 0.054 -0.517 0 -0.18 -0.018 -0.352 -0.054 -0.514a1.271 1.271 0 0 0 -0.173 -0.426 0.901 0.901 0 0 0 -0.308 -0.291 0.916 0.916 0 0 0 -0.461 -0.108zm-8.537 0.068 -0.84 0.618 0.313 0.43 0.476 -0.368v1.877h0.603v-2.557zm6.486 0 -0.841 0.618 0.314 0.43 0.477 -0.368v1.877h0.603v-2.557zm-4.435 0.445c0.08 0 0.143 0.028 0.193 0.084 0.05 0.057 0.087 0.127 0.114 0.21 0.026 0.083 0.044 0.173 0.054 0.269a2.541 2.541 0 0 1 0 0.533c-0.01 0.097 -0.028 0.187 -0.054 0.27a0.584 0.584 0 0 1 -0.114 0.21 0.243 0.243 0 0 1 -0.193 0.085 0.248 0.248 0 0 1 -0.195 -0.086 0.584 0.584 0 0 1 -0.118 -0.209 1.245 1.245 0 0 1 -0.056 -0.27 2.645 2.645 0 0 1 0 -0.533c0.01 -0.096 0.029 -0.186 0.056 -0.27a0.583 0.583 0 0 1 0.118 -0.209 0.25 0.25 0 0 1 0.195 -0.084zm6.486 0c0.08 0 0.144 0.028 0.193 0.084 0.05 0.057 0.087 0.127 0.114 0.21 0.027 0.083 0.044 0.173 0.054 0.269a2.541 2.541 0 0 1 0 0.533c-0.01 0.097 -0.027 0.187 -0.054 0.27a0.584 0.584 0 0 1 -0.114 0.21 0.243 0.243 0 0 1 -0.193 0.085 0.249 0.249 0 0 1 -0.195 -0.086 0.581 0.581 0 0 1 -0.117 -0.209 1.245 1.245 0 0 1 -0.056 -0.27 2.642 2.642 0 0 1 0 -0.533c0.01 -0.096 0.028 -0.186 0.056 -0.27a0.58 0.58 0 0 1 0.117 -0.209 0.25 0.25 0 0 1 0.195 -0.084zm-2.191 3.51a0.93 0.93 0 0 0 -0.463 0.109 0.908 0.908 0 0 0 -0.312 0.291c-0.08 0.122 -0.139 0.263 -0.175 0.426a2.383 2.383 0 0 0 -0.054 0.514c0 0.18 0.018 0.353 0.054 0.516 0.036 0.164 0.094 0.308 0.175 0.432a0.91 0.91 0 0 0 0.312 0.296 0.92 0.92 0 0 0 0.463 0.11c0.18 0 0.333 -0.037 0.46 -0.11a0.892 0.892 0 0 0 0.308 -0.296 1.32 1.32 0 0 0 0.174 -0.432c0.036 -0.163 0.054 -0.335 0.054 -0.516 0 -0.18 -0.018 -0.352 -0.054 -0.514a1.274 1.274 0 0 0 -0.174 -0.426 0.89 0.89 0 0 0 -0.309 -0.291 0.918 0.918 0 0 0 -0.46 -0.108zm-6.402 0.07 -0.841 0.617 0.314 0.43 0.476 -0.369v1.878h0.604v-2.557zm2.125 0 -0.841 0.617 0.314 0.43 0.477 -0.369v1.878h0.603v-2.557zm2.116 0 -0.84 0.617 0.313 0.43 0.477 -0.369v1.878h0.603v-2.557zm2.16 0.443c0.08 0 0.144 0.028 0.194 0.085a0.605 0.605 0 0 1 0.114 0.21c0.026 0.083 0.044 0.172 0.053 0.269a2.639 2.639 0 0 1 0 0.532 1.28 1.28 0 0 1 -0.053 0.27 0.585 0.585 0 0 1 -0.114 0.21 0.244 0.244 0 0 1 -0.193 0.085 0.25 0.25 0 0 1 -0.196 -0.085 0.589 0.589 0 0 1 -0.117 -0.21 1.245 1.245 0 0 1 -0.056 -0.27 2.597 2.597 0 0 1 0 -0.532c0.01 -0.097 0.028 -0.186 0.056 -0.27a0.589 0.589 0 0 1 0.117 -0.209 0.249 0.249 0 0 1 0.196 -0.085zm-6.729 3.073a0.676 0.676 0 0 0 -0.335 0.078 0.661 0.661 0 0 0 -0.227 0.211 0.91 0.91 0 0 0 -0.127 0.31c-0.027 0.118 -0.04 0.242 -0.04 0.373s0.013 0.256 0.04 0.375a0.93 0.93 0 0 0 0.127 0.313 0.65 0.65 0 0 0 0.227 0.215c0.092 0.053 0.204 0.08 0.335 0.08a0.655 0.655 0 0 0 0.334 -0.08 0.65 0.65 0 0 0 0.225 -0.215c0.057 -0.09 0.1 -0.194 0.125 -0.313a1.75 1.75 0 0 0 0.04 -0.375c0 -0.13 -0.014 -0.255 -0.04 -0.373a0.931 0.931 0 0 0 -0.125 -0.31 0.658 0.658 0 0 0 -0.225 -0.21 0.667 0.667 0 0 0 -0.334 -0.08zm3.086 0a0.675 0.675 0 0 0 -0.336 0.078 0.661 0.661 0 0 0 -0.226 0.211 0.907 0.907 0 0 0 -0.127 0.31 1.69 1.69 0 0 0 -0.04 0.373c0 0.131 0.013 0.256 0.04 0.375a0.928 0.928 0 0 0 0.127 0.313c0.058 0.09 0.134 0.162 0.226 0.215 0.093 0.053 0.205 0.08 0.336 0.08a0.655 0.655 0 0 0 0.334 -0.08 0.65 0.65 0 0 0 0.224 -0.215c0.058 -0.09 0.1 -0.194 0.126 -0.313a1.752 1.752 0 0 0 0 -0.748 0.94 0.94 0 0 0 -0.126 -0.31 0.657 0.657 0 0 0 -0.224 -0.21 0.667 0.667 0 0 0 -0.334 -0.08zm5.108 0a0.675 0.675 0 0 0 -0.336 0.078 0.661 0.661 0 0 0 -0.226 0.211 0.91 0.91 0 0 0 -0.127 0.31c-0.027 0.118 -0.04 0.242 -0.04 0.373s0.013 0.256 0.04 0.375a0.931 0.931 0 0 0 0.127 0.313c0.058 0.09 0.134 0.162 0.226 0.215 0.093 0.053 0.205 0.08 0.336 0.08 0.13 0 0.243 -0.027 0.334 -0.08a0.65 0.65 0 0 0 0.224 -0.215c0.058 -0.09 0.1 -0.194 0.126 -0.313a1.75 1.75 0 0 0 0.04 -0.375c0 -0.13 -0.014 -0.255 -0.04 -0.373a0.943 0.943 0 0 0 -0.126 -0.31 0.657 0.657 0 0 0 -0.224 -0.21 0.668 0.668 0 0 0 -0.334 -0.08zm-6.658 0.05 -0.61 0.448 0.227 0.311 0.346 -0.266v1.362h0.438v-1.856zm3.068 0 -0.61 0.448 0.227 0.311 0.346 -0.266v1.362h0.438v-1.856zm5.108 0 -0.611 0.448 0.228 0.311 0.346 -0.266v1.362h0.438v-1.856zm-9.712 0.322c0.058 0 0.105 0.02 0.14 0.062a0.421 0.421 0 0 1 0.083 0.151 0.96 0.96 0 0 1 0.04 0.196 1.932 1.932 0 0 1 0 0.386 0.954 0.954 0 0 1 -0.04 0.197 0.421 0.421 0 0 1 -0.083 0.152 0.176 0.176 0 0 1 -0.14 0.061 0.18 0.18 0 0 1 -0.141 -0.06 0.427 0.427 0 0 1 -0.085 -0.153 0.887 0.887 0 0 1 -0.041 -0.197 1.96 1.96 0 0 1 0 -0.386 0.893 0.893 0 0 1 0.04 -0.196 0.42 0.42 0 0 1 0.086 -0.151 0.181 0.181 0 0 1 0.141 -0.062zm3.086 0c0.058 0 0.104 0.02 0.14 0.062a0.421 0.421 0 0 1 0.082 0.151 0.94 0.94 0 0 1 0.04 0.196 1.906 1.906 0 0 1 0 0.386 0.93 0.93 0 0 1 -0.04 0.197 0.421 0.421 0 0 1 -0.082 0.152 0.176 0.176 0 0 1 -0.14 0.061 0.18 0.18 0 0 1 -0.141 -0.06 0.42 0.42 0 0 1 -0.086 -0.153 0.846 0.846 0 0 1 -0.04 -0.197 1.965 1.965 0 0 1 -0.011 -0.195c0 -0.057 0.004 -0.121 0.01 -0.191a0.849 0.849 0 0 1 0.041 -0.196 0.42 0.42 0 0 1 0.086 -0.151 0.182 0.182 0 0 1 0.141 -0.062zm5.108 0c0.058 0 0.104 0.02 0.14 0.062a0.421 0.421 0 0 1 0.082 0.151 0.92 0.92 0 0 1 0.04 0.196 1.963 1.963 0 0 1 0 0.386 0.943 0.943 0 0 1 -0.04 0.197 0.421 0.421 0 0 1 -0.082 0.152 0.177 0.177 0 0 1 -0.14 0.061 0.18 0.18 0 0 1 -0.142 -0.06 0.437 0.437 0 0 1 -0.085 -0.153 0.95 0.95 0 0 1 -0.04 -0.197 1.965 1.965 0 0 1 -0.011 -0.195c0 -0.057 0.004 -0.121 0.01 -0.191a0.959 0.959 0 0 1 0.04 -0.196 0.47 0.47 0 0 1 0.086 -0.151 0.181 0.181 0 0 1 0.142 -0.062zm-1.684 1.814a0.675 0.675 0 0 0 -0.336 0.079 0.66 0.66 0 0 0 -0.227 0.21 0.91 0.91 0 0 0 -0.127 0.31 1.731 1.731 0 0 0 0 0.748 0.939 0.939 0 0 0 0.127 0.314c0.059 0.09 0.134 0.162 0.227 0.215 0.093 0.053 0.205 0.08 0.336 0.08a0.66 0.66 0 0 0 0.334 -0.08 0.648 0.648 0 0 0 0.224 -0.215c0.058 -0.09 0.1 -0.195 0.126 -0.314a1.737 1.737 0 0 0 -0.001 -0.747 0.928 0.928 0 0 0 -0.125 -0.31 0.65 0.65 0 0 0 -0.224 -0.211 0.668 0.668 0 0 0 -0.334 -0.079zm3.063 0a0.676 0.676 0 0 0 -0.336 0.079 0.664 0.664 0 0 0 -0.227 0.21 0.906 0.906 0 0 0 -0.127 0.31 1.74 1.74 0 0 0 0 0.748 0.936 0.936 0 0 0 0.127 0.314 0.66 0.66 0 0 0 0.227 0.215c0.092 0.053 0.204 0.08 0.336 0.08a0.654 0.654 0 0 0 0.334 -0.08 0.648 0.648 0 0 0 0.223 -0.215c0.058 -0.09 0.1 -0.195 0.126 -0.314a1.74 1.74 0 0 0 0 -0.747 0.928 0.928 0 0 0 -0.126 -0.31 0.65 0.65 0 0 0 -0.223 -0.211 0.666 0.666 0 0 0 -0.334 -0.079zm-1.545 0.05 -0.611 0.448 0.228 0.312 0.346 -0.267v1.363h0.438v-1.856zm-1.518 0.323c0.057 0 0.104 0.02 0.14 0.061a0.42 0.42 0 0 1 0.082 0.152 0.91 0.91 0 0 1 0.04 0.195 1.966 1.966 0 0 1 0 0.387 0.951 0.951 0 0 1 -0.04 0.197 0.421 0.421 0 0 1 -0.082 0.152 0.177 0.177 0 0 1 -0.14 0.06 0.18 0.18 0 0 1 -0.142 -0.06 0.428 0.428 0 0 1 -0.085 -0.152 0.914 0.914 0 0 1 -0.04 -0.197 1.96 1.96 0 0 1 -0.011 -0.195c0 -0.058 0.003 -0.122 0.01 -0.192a0.923 0.923 0 0 1 0.041 -0.195c0.02 -0.06 0.048 -0.11 0.085 -0.152a0.181 0.181 0 0 1 0.142 -0.061zm3.063 0c0.057 0 0.104 0.02 0.14 0.061a0.42 0.42 0 0 1 0.082 0.152 0.94 0.94 0 0 1 0.04 0.195 1.91 1.91 0 0 1 0 0.387 0.93 0.93 0 0 1 -0.04 0.197 0.422 0.422 0 0 1 -0.083 0.152 0.175 0.175 0 0 1 -0.14 0.06 0.18 0.18 0 0 1 -0.141 -0.06 0.423 0.423 0 0 1 -0.085 -0.152 0.907 0.907 0 0 1 -0.04 -0.197 1.95 1.95 0 0 1 0 -0.387 0.915 0.915 0 0 1 0.04 -0.195c0.02 -0.06 0.048 -0.11 0.085 -0.152a0.182 0.182 0 0 1 0.142 -0.061zm-9.713 0.185a0.465 0.465 0 0 0 -0.232 0.055 0.456 0.456 0 0 0 -0.157 0.146 0.627 0.627 0 0 0 -0.089 0.215 1.168 1.168 0 0 0 -0.027 0.259c0 0.09 0.009 0.177 0.027 0.26a0.648 0.648 0 0 0 0.089 0.216c0.04 0.063 0.093 0.112 0.157 0.149a0.459 0.459 0 0 0 0.232 0.056c0.09 0 0.168 -0.02 0.231 -0.056a0.45 0.45 0 0 0 0.156 -0.149 0.67 0.67 0 0 0 0.087 -0.217 1.218 1.218 0 0 0 0 -0.518 0.647 0.647 0 0 0 -0.087 -0.215 0.448 0.448 0 0 0 -0.156 -0.146 0.458 0.458 0 0 0 -0.23 -0.055zm1.052 0.035 -0.423 0.31 0.158 0.217 0.24 -0.185v0.944h0.303v-1.286zm-1.052 0.224c0.04 0 0.073 0.014 0.097 0.042a0.284 0.284 0 0 1 0.057 0.105 0.69 0.69 0 0 1 0.028 0.136c0.004 0.049 0.007 0.092 0.007 0.133 0 0.04 -0.003 0.086 -0.007 0.135a0.684 0.684 0 0 1 -0.028 0.136 0.285 0.285 0 0 1 -0.057 0.105 0.123 0.123 0 0 1 -0.097 0.043 0.125 0.125 0 0 1 -0.098 -0.043 0.298 0.298 0 0 1 -0.059 -0.105 0.612 0.612 0 0 1 -0.028 -0.136 1.39 1.39 0 0 1 0 -0.268 0.62 0.62 0 0 1 0.028 -0.136 0.297 0.297 0 0 1 0.06 -0.105 0.125 0.125 0 0 1 0.097 -0.042zm3.775 1.394a0.463 0.463 0 0 0 -0.232 0.054 0.452 0.452 0 0 0 -0.157 0.146 0.621 0.621 0 0 0 -0.088 0.214 1.19 1.19 0 0 0 0 0.519 0.641 0.641 0 0 0 0.088 0.217 0.46 0.46 0 0 0 0.157 0.15 0.458 0.458 0 0 0 0.232 0.054 0.454 0.454 0 0 0 0.232 -0.055 0.45 0.45 0 0 0 0.155 -0.149 0.664 0.664 0 0 0 0.087 -0.217 1.189 1.189 0 0 0 0 -0.519 0.642 0.642 0 0 0 -0.087 -0.214 0.446 0.446 0 0 0 -0.155 -0.146 0.459 0.459 0 0 0 -0.232 -0.054zm1.052 0.034 -0.423 0.31 0.158 0.216 0.24 -0.185v0.945h0.303V22.68zm-1.052 0.223c0.04 0 0.073 0.014 0.098 0.043a0.3 0.3 0 0 1 0.057 0.105 0.643 0.643 0 0 1 0.027 0.135 1.31 1.31 0 0 1 0 0.268 0.654 0.654 0 0 1 -0.027 0.137 0.307 0.307 0 0 1 -0.057 0.105 0.124 0.124 0 0 1 -0.098 0.042 0.125 0.125 0 0 1 -0.098 -0.042 0.293 0.293 0 0 1 -0.059 -0.105 0.618 0.618 0 0 1 -0.028 -0.137 1.364 1.364 0 0 1 0 -0.268 0.612 0.612 0 0 1 0.028 -0.135 0.287 0.287 0 0 1 0.06 -0.105 0.123 0.123 0 0 1 0.097 -0.043z" fill="#ffffff" stroke-width="1"></path>
+</svg> <h3 style="color: maroon;">TryHackMe</h3></div>
+                <p>Learn cybersecurity through hands-on exercises and guided rooms. Perfect for beginners and advanced hackers alike.</p>
+            </div>
+            <div class="platform-card" onclick="window.location.href='./posts/offsec/index.html'">
+                <h3> <img src="./offsec.svg" alt="" style="width: 45%; height: auto;"></h3>
+                <p>Offensive Security's proving grounds for OSCP preparation. Test your skills in realistic penetration testing scenarios.</p>
+            </div>
+        </div>
+    </section>
 
-        <section id="contact">
-            <h2>Contact & Social</h2>
-            <p>
-                Connect with me on various platforms for cybersecurity discussions, collaboration, 
-                and knowledge sharing.
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="content-grid">
+            <div class="content-card">
+                <h3>AV Evasion Toolkit</h3>
+                <p class="date">In Development</p>
+                <p>Custom toolkit for bypassing antivirus and EDR solutions using PowerShell, C#, and VBA techniques.</p>
+            </div>
+            <div class="content-card">
+                <h3>Custom Exploit Framework</h3>
+                <p class="date">2024</p>
+                <p>Modular exploitation framework for penetration testing engagements with automated payload generation.</p>
+            </div>
+            <div class="content-card">
+                <h3>Red Team Automation Scripts</h3>
+                <p class="date">2024</p>
+                <p>Collection of automation scripts for reconnaissance, enumeration, and post-exploitation activities.</p>
+            </div>
+            <div class="content-card">
+                <h3>API Security Testing Suite</h3>
+                <p class="date">Coming Soon</p>
+                <p>Comprehensive testing suite for API penetration testing including authentication bypass and injection attacks.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <h2 class="section-title">Christianity Blog</h2>
+        <div class="content-grid">
+            <div class="content-card">
+                <h3>Faith in the Digital Age</h3>
+                <p class="date">October 2024</p>
+                <p>Exploring how Christian values guide ethical decision-making in cybersecurity and technology.</p>
+            </div>
+            <div class="content-card">
+                <h3>Grace Through Challenges</h3>
+                <p class="date">September 2024</p>
+                <p>Reflections on finding strength through faith during difficult penetration testing engagements and professional challenges.</p>
+            </div>
+            <div class="content-card">
+                <h3>Integrity in Hacking</h3>
+                <p class="date">August 2024</p>
+                <p>How biblical principles of honesty and integrity shape my approach to ethical hacking and security research.</p>
+            </div>
+            <div class="content-card">
+                <h3>Serving Through Skills</h3>
+                <p class="date">July 2024</p>
+                <p>Using cybersecurity expertise as a form of service to protect communities and organizations from digital threats.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; color: #c0c0c0; margin-bottom: 2rem;">
+                Have questions about my writeups? Want to discuss hacking techniques or collaborate? 
+                Feel free to reach out on social media!
             </p>
             <div class="social-links">
-                <a href="https://github.com/hackwell" class="social-link">GitHub</a>
-                <a href="https://linkedin.com/in/hackwell" class="social-link">LinkedIn</a>
-                <a href="https://twitter.com/hackwell" class="social-link">Twitter</a>
-                <a href="mailto:contact@hackwell.com" class="social-link">Email</a>
+                <a href="https://github.com/Muzec0318" target="_blank">GitHub</a>
+                <a href="https://twitter.com/muzec_saminu" target="_blank">Twitter</a>
+                <a href="#" target="_blank">LinkedIn</a>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 HackWell Blog. All rights reserved. | Educational content only.</p>
-        </div>
+        <p style="color: #00ff41; font-size: 1.1rem; margin-bottom: 1rem;">
+            Keep Hacking, Stay Curious 🚀
+        </p>
+        <p style="color: #888;">
+            © 2025 Bruce | Godly Engineer | CRTA • ISC2 • CRT-AD
+        </p>
     </footer>
-
-    <script src="assets/js/main.js"></script>
 </body>
 </html>
