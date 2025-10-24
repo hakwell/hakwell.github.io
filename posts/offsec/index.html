@@ -3,103 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OffSec Writeups | Muzec</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
-    <link rel="stylesheet" href="../../assets/css/main.css">
+    <title>TryHackMe Writeups | Muzec</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #141d2b;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #141d2b;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(159, 239, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(159, 239, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: -1;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(159, 239, 0, 0.4), transparent);
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .orb2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(159, 239, 0, 0.3), transparent);
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 7s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(20, 29, 43, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(159, 239, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #9fef00;
+            text-shadow: 0 0 30px rgba(159, 239, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            flex-direction: row;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #9fef00;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover {
+            color: #9fef00;
+            text-shadow: 0 0 20px rgba(159, 239, 0, 0.6);
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            color: #9fef00;
+            text-shadow: 0 0 40px rgba(159, 239, 0, 0.6);
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            text-shadow: 0 0 20px rgba(159, 239, 0, 0.3);
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .breadcrumb a {
+            color: #9fef00;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(159, 239, 0, 0.3);
+            border-radius: 6px;
+        }
+
+        .breadcrumb a:hover {
+            background: rgba(159, 239, 0, 0.1);
+            box-shadow: 0 0 20px rgba(159, 239, 0, 0.2);
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(159, 239, 0, 0.3), transparent);
+            margin: 2rem 0;
+        }
+
+        /* Writeup List */
+        .writeups-section {
+            margin: 3rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #9fef00;
+            text-shadow: 0 0 30px rgba(159, 239, 0, 0.5);
+            margin: 2rem 0 1.5rem 0;
+            border-left: 4px solid #9fef00;
+            padding-left: 1rem;
+        }
+
+        .writeup-list {
+            list-style: none;
+        }
+
+        .writeup-item {
+            background: rgba(20, 29, 43, 0.6);
+            border-left: 3px solid #9fef00;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .writeup-item:hover {
+            background: rgba(20, 29, 43, 0.8);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(159, 239, 0, 0.2);
+        }
+
+        .writeup-content {
+            flex: 1;
+        }
+
+        .writeup-date {
+            color: #9fef00;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(159, 239, 0, 0.4);
+        }
+
+        .writeup-title {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+        }
+
+        .writeup-item a .writeup-title {
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .writeup-item a:hover .writeup-title {
+            color: #9fef00;
+            text-shadow: 0 0 15px rgba(159, 239, 0, 0.5);
+        }
+
+        .writeup-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.8rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(159, 239, 0, 0.15);
+            color: #9fef00;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(159, 239, 0, 0.3);
+        }
+
+        .tag:hover {
+            background: rgba(159, 239, 0, 0.25);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 14, 39, 0.9);
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+            padding: 3rem 5%;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: #00ff41;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .breadcrumb {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .writeup-item {
+                flex-direction: column;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+
     <header>
-        <a href="../../index.html" class="logo">muzec@hackwell:~$</a>
-        <a href="../../index.html" class="back-btn">← Back to Home</a>
+        <div class="logo">root💀hackwell:~# /</div>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#platforms">Platforms</a>
+            <a href="../../index.html#projects">Projects</a>
+            <a href="../../index.html#blog">Blog</a>
+            <a href="../../index.html#contact">Connect</a>
+        </nav>
     </header>
 
     <div class="container">
-        <h1>OffSec Writeups</h1>
-        <p class="subtitle">Advanced penetration testing and security research</p>
-
-        <div class="writeups-grid" id="writeups"></div>
-    </div>
-
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <div class="markdown-content" id="content"></div>
-        </div>
-    </div>
-
-    <script src="../../assets/js/main.js"></script>
-    <script>
-        // OffSec writeups data
-        const writeups = [
-            { title: "OSCP Preparation", difficulty: "hard", date: "2024-01-25", file: "oscp-prep.md", preview: "Comprehensive guide for OSCP certification preparation" },
-            { title: "Active Directory Exploitation", difficulty: "hard", date: "2024-01-22", file: "ad-exploitation.md", preview: "Advanced AD attack techniques and privilege escalation" },
-            { title: "Buffer Overflow Exploitation", difficulty: "medium", date: "2024-01-20", file: "buffer-overflow.md", preview: "Stack-based buffer overflow exploitation techniques" },
-            { title: "Web Application Security", difficulty: "medium", date: "2024-01-18", file: "web-app-sec.md", preview: "Advanced web application penetration testing" },
-            { title: "Network Penetration Testing", difficulty: "hard", date: "2024-01-15", file: "network-pentest.md", preview: "Network infrastructure security assessment" },
-            { title: "Linux Privilege Escalation", difficulty: "medium", date: "2024-01-12", file: "linux-privesc.md", preview: "Advanced Linux privilege escalation techniques" },
-            { title: "Windows Privilege Escalation", difficulty: "medium", date: "2024-01-10", file: "windows-privesc.md", preview: "Windows privilege escalation and lateral movement" },
-            { title: "Cryptography Attacks", difficulty: "hard", date: "2024-01-08", file: "crypto-attacks.md", preview: "Cryptographic vulnerabilities and exploitation" }
-        ];
-
-        function renderWriteups() {
-            const grid = document.getElementById('writeups');
-            grid.innerHTML = writeups.map(w => `
-                <div class="writeup-card" onclick="loadWriteup('${w.file}')">
-                    <h3>${w.title}</h3>
-                    <span class="difficulty ${w.difficulty}">${w.difficulty.toUpperCase()}</span>
-                    <p>${w.preview}</p>
-                    <span class="date">${w.date}</span>
-                </div>
-            `).join('');
-        }
-
-        function loadWriteup(file) {
-            const modal = document.getElementById('modal');
-            const content = document.getElementById('content');
-            
-            // In production, fetch from: `/posts/offsec/${file}`
-            // For demo, showing sample markdown
-            const sampleMarkdown = `# ${file.replace('.md', '').replace('-', ' ').toUpperCase()} - OffSec
-
-## Overview
-This is a sample OffSec writeup. Replace this content by fetching your actual markdown files.
-
-## Methodology
-Description of the penetration testing methodology used...
-
-## Reconnaissance
-\`\`\`bash
-nmap -sC -sV -oN nmap.txt target.com
-\`\`\`
-
-## Vulnerability Assessment
-Description of vulnerability assessment steps...
-
-## Exploitation
-Steps to exploit identified vulnerabilities...
-
-## Post-Exploitation
-Post-exploitation activities and privilege escalation...
-
-## Reporting
-Key findings and recommendations...
-
----
-*Add your actual writeup content here*`;
-
-            content.innerHTML = marked.parse(sampleMarkdown);
-            modal.style.display = 'block';
-        }
-
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-
-        window.onclick = (e) => {
-            if (e.target.id === 'modal') closeModal();
-        };
-
-        renderWriteups();
-    </script>
-</body>
-</html>
+        <div class
