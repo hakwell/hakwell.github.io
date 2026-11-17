@@ -1,5 +1,5 @@
 ---
-layout: Writeup
+layout: article
 title: "Editor"
 date: 2026-05-17
 platform: "HackTheBox"
