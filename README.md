@@ -12,6 +12,6 @@
     <div class="line">👀 I'm interested in Cyber Security</div>
     <div class="line">🌱 I'm currently learning Red Team Ops</div>
     <div class="line">💞️ I'm looking to collaborate on Projects</div>
-    <div class="line">📫 How to reach me Buzz me On Discord @hackwell_12e LinkedIn @Bruce_Byamungu</div>
+    <div class="line">📫 How to reach me Buzz me On LinkedIn @Brice Isezerano</div>
 </body>
 </html>
