@@ -4,13 +4,15 @@ date: 2026-03-03
 author: "Cedric"
 ---
 
-*Photo 1 by Cedric. Find more of his work at [Cedric on the Quest](https://cedriconthequest.blogspot.com/).*
+![Photo by Trnava University]( /assets/images/faith/trnava-university-BEEyeib-am8-unsplash.jpg )
+
+*Find more of Cedric's content at [Cedric on the Quest](https://cedriconthequest.blogspot.com/).*
 
 University life is new for many students. It is a season of adjustment. There are questions about whether the right program was chosen, pressure to make friends, and the constant feeling of trying to [...]
 
 But something deeper is happening during these years.
 
-University doesn't just provide academic knowledge; it shapes one's outlook on the world. Whether intentionally or not, a worldview is being formed—ideas about truth, morality, success, purpose, and [...]
+University doesn't just provide academic knowledge; it shapes one's outlook on the world. Whether intentionally or not, a worldview is being formed—ideas about truth, morality, success, purpose, and[...]
 
 If you're like me, this stage of life also raises deeper questions. What is the purpose of life? Why am I here? What truly matters? Is life simply to be born, go to school, go to university, finish, g[...]
 
