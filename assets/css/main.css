@@ -1,4 +1,11 @@
 /* Main CSS for HackWell Blog */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap');
+
+:root {
+    --font-body: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    --font-display: 'Syne', 'Segoe UI', sans-serif;
+}
+
 * { 
     margin: 0; 
     padding: 0; 
@@ -6,7 +13,7 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     background: #0a0e17;
     color: #e4e4e7;
     line-height: 1.6;
@@ -30,6 +37,7 @@ header {
     font-weight: 700;
     color: #22c55e;
     text-decoration: none;
+    font-family: var(--font-display);
 }
 
 .back-btn {
@@ -39,6 +47,7 @@ header {
     border: 1px solid rgba(34, 197, 94, 0.3);
     border-radius: 6px;
     transition: all 0.3s;
+    font-family: var(--font-display);
 }
 
 .back-btn:hover {
@@ -57,6 +66,7 @@ h1 {
     font-size: 2.5rem;
     color: #22c55e;
     margin-bottom: 1rem;
+    font-family: var(--font-display);
 }
 
 .subtitle {
@@ -90,6 +100,7 @@ h1 {
     color: #22c55e;
     margin-bottom: 0.5rem;
     font-size: 1.3rem;
+    font-family: var(--font-display);
 }
 
 .difficulty {
@@ -173,11 +184,13 @@ h1 {
     color: #22c55e;
     margin-top: 2rem;
     margin-bottom: 1rem;
+    font-family: var(--font-display);
 }
 
 .markdown-content h3 { 
     color: #10b981; 
     margin-top: 1.5rem; 
+    font-family: var(--font-display);
 }
 
 .markdown-content code {
@@ -231,6 +244,7 @@ h1 {
     color: #22c55e;
     margin-bottom: 1rem;
     font-size: 1.5rem;
+    font-family: var(--font-display);
 }
 
 .category-card p {
@@ -252,6 +266,7 @@ h1 {
     font-size: 1.2rem;
     font-weight: bold;
     color: #22c55e;
+    font-family: var(--font-display);
 }
 
 .stat-label {
@@ -271,6 +286,7 @@ nav {
     padding: 0.5rem 1rem;
     border-radius: 6px;
     transition: all 0.3s;
+    font-family: var(--font-display);
 }
 
 .nav-link:hover {
@@ -300,6 +316,7 @@ section h2 {
     color: #22c55e;
     margin-bottom: 2rem;
     font-size: 2rem;
+    font-family: var(--font-display);
 }
 
 section p {
@@ -322,6 +339,7 @@ section p {
     border: 1px solid rgba(34, 197, 94, 0.3);
     border-radius: 6px;
     transition: all 0.3s;
+    font-family: var(--font-display);
 }
 
 .social-link:hover {
