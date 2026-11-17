@@ -7,174 +7,120 @@ title: Home
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="The personal blog of Isezerano Brice Fiquerite: cybersecurity, faith, and learning.">
+  <meta name="description" content="The personal blog of Isezerano Brice Fiquerite: cybersecurity, Christian faith, and learning.">
   <meta name="theme-color" content="#0d0f1a">
   <title>Isezerano Brice Fiquerite | Blog</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      color-scheme: dark;
-      --bg: #0d0f1a;
-      --panel: #151829;
-      --ink: #e9e6dc;
-      --dim: #a0a4b8;
-      --accent: #a99aff;
-      --warm: #ff9a79;
-      --line: #292d45;
-      --faith: #c8a9ff;
-      font-family: "IBM Plex Mono", ui-monospace, monospace;
-      scroll-behavior: smooth;
-    }
-
-    * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.7; }
-    a { color: inherit; text-decoration: none; }
-    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
-
-    .site-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; padding: 22px 0; border-bottom: 1px solid var(--line); color: var(--dim); font-size: 13px; }
-    .site-nav a:hover { color: var(--accent); }
-    .site-nav .spacer { flex: 1; }
-    .brand { color: var(--ink); font-family: Syne, sans-serif; font-size: 17px; font-weight: 800; }
-
-    .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 76px 0 64px; }
-    .eyebrow { color: var(--accent); font-size: 12px; letter-spacing: .13em; text-transform: uppercase; }
-    h1 { margin: 18px 0 24px; font: 800 clamp(54px, 9vw, 112px)/.9 Syne, sans-serif; letter-spacing: -.055em; }
-    h1 span { display: block; color: transparent; -webkit-text-stroke: 1.5px var(--accent); }
-    .lede { max-width: 52ch; color: var(--dim); }
-    .lede strong { color: var(--ink); font-weight: 500; }
-    .certs { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
-    .certs span { padding: 3px 12px; border: 1px solid var(--warm); border-radius: 2px 12px; color: var(--warm); font-size: 13px; }
-
-    .profile { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); box-shadow: 0 0 0 6px rgb(169 154 255 / 8%); }
-    .profile-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); color: var(--dim); font-size: 12px; }
-    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
-    .dot:first-child { background: var(--warm); }
-    .profile-body { padding: 24px; }
-    .profile-body p { margin: 0 0 12px; }
-    .prompt { color: var(--accent); }
-    .muted { color: var(--dim); }
-    .profile-body a { color: var(--accent); border-bottom: 1px dashed var(--accent); }
-
-    section { padding: 46px 0; scroll-margin-top: 24px; }
-    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
-    h2 { margin: 0; font: 700 clamp(30px, 4vw, 46px)/1 Syne, sans-serif; letter-spacing: -.035em; }
-    .section-head p { max-width: 48ch; margin: 0; color: var(--dim); font-size: 13px; }
-    .blog-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-    .blog-card { min-height: 220px; display: flex; flex-direction: column; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); transition: transform .18s ease, border-color .18s ease; }
-    .blog-card:hover { transform: translateY(-3px); border-color: var(--accent); }
-    .blog-card.faith:hover { border-color: var(--faith); }
-    .blog-card .number { color: var(--accent); font-size: 12px; }
-    .blog-card.faith .number { color: var(--faith); }
-    .blog-card h3 { margin: 24px 0 8px; font: 700 24px Syne, sans-serif; }
-    .blog-card p { color: var(--dim); font-size: 13px; }
-    .empty { margin-top: auto; padding-top: 12px; color: var(--dim); font-size: 12px; }
-
-    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-    .about p { color: var(--dim); }
-    .faith-note { padding: 22px; border: 1px solid rgb(200 169 255 / 40%); border-radius: 12px; background: rgb(200 169 255 / 5%); }
-    .faith-note h3 { margin-top: 0; font: 700 22px Syne, sans-serif; color: var(--faith); }
-    .faith-note p { margin-bottom: 0; }
-
-    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px 0 46px; border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; }
-    footer a { color: var(--ink); border-bottom: 1px solid var(--accent); }
-
-    @media (max-width: 820px) {
-      .hero { grid-template-columns: 1fr; gap: 32px; padding-top: 48px; }
-      .about { grid-template-columns: 1fr; gap: 16px; }
-      .section-head { display: block; }
-      .section-head p { margin-top: 12px; }
-    }
-    @media (max-width: 560px) {
-      .wrap { width: min(100% - 28px, 1120px); }
-      .blog-grid { grid-template-columns: 1fr; }
-      .site-nav { gap: 10px 16px; }
-      .site-nav .spacer { display: none; }
-      .profile-body { padding: 18px; }
-    }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+    :root{color-scheme:dark;--bg:#0d0f1a;--panel:#151829;--ink:#e9e6dc;--dim:#a0a4b8;--accent:#a99aff;--warm:#ff9a79;--line:#292d45;--faith:#c8a9ff;font-family:"IBM Plex Mono",ui-monospace,monospace;scroll-behavior:smooth}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.7}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}.wrap{width:min(1120px,calc(100% - 40px));margin:0 auto}
+    .site-nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;padding:22px 0;border-bottom:1px solid var(--line);color:var(--dim);font-size:13px}.site-nav a:hover{color:var(--accent)}.site-nav .spacer{flex:1}.brand{color:var(--ink);font:800 17px Syne,sans-serif}
+    .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding:76px 0 64px}.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.13em;text-transform:uppercase}h1{margin:18px 0 24px;font:800 clamp(54px,9vw,112px)/.9 Syne,sans-serif;letter-spacing:-.055em}h1 span{display:block;color:transparent;-webkit-text-stroke:1.5px var(--accent)}.lede{max-width:52ch;color:var(--dim)}.lede strong{color:var(--ink);font-weight:500}.certs{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}.certs span{padding:3px 12px;border:1px solid var(--warm);border-radius:2px 12px;color:var(--warm);font-size:13px}
+    .profile{overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:0 0 0 6px rgb(169 154 255 / 8%)}.profile-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);color:var(--dim);font-size:12px}.dot{width:10px;height:10px;border-radius:50%;background:var(--line)}.dot:first-child{background:var(--warm)}.profile-body{padding:24px}.profile-body p{margin:0 0 12px}.prompt{color:var(--accent)}.muted{color:var(--dim)}.profile-body a{color:var(--accent);border-bottom:1px dashed var(--accent)}
+    section{padding:46px 0;scroll-margin-top:24px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:24px}h2{margin:0;font:700 clamp(30px,4vw,46px)/1 Syne,sans-serif;letter-spacing:-.035em}.section-head p{max-width:55ch;margin:0;color:var(--dim);font-size:13px}.section-title{margin:0 0 8px}.section-subtitle{margin:8px 0 0;color:var(--dim);font-size:13px}
+    .filters{display:flex;flex-wrap:wrap;gap:9px;margin:24px 0 18px}.filter{padding:7px 14px;border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--dim);font:inherit;font-size:12px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}.filter:hover,.filter[aria-pressed=true]{border-color:var(--accent);background:var(--accent);color:var(--bg)}.result-count{margin:0 0 14px;color:var(--dim);font-size:12px}
+    .post-list{border-top:1px solid var(--line)}.post-card{display:grid;grid-template-columns:minmax(150px,200px) 1fr auto;align-items:center;gap:18px;padding:18px 12px;border-bottom:1px solid var(--line);transition:background .15s,padding .15s}.post-card:hover{padding-left:20px;background:var(--panel)}.post-meta{color:var(--dim);font-size:12px}.post-platform{color:var(--warm)}.post-title{margin:0;font:600 19px Syne,sans-serif}.post-excerpt{margin:5px 0 0;color:var(--dim);font-size:13px}.post-open{color:var(--accent);font-size:12px;white-space:nowrap}.empty-state{padding:20px 12px;border-bottom:1px solid var(--line);color:var(--dim);font-size:13px}.empty-state code{color:var(--accent)}
+    .faith-panel{padding:22px;border:1px solid rgb(200 169 255 / 40%);border-radius:12px;background:rgb(200 169 255 / 5%)}.faith-panel .eyebrow{color:var(--faith)}.faith-panel .post-card:hover{background:rgb(200 169 255 / 6%)}.faith-panel .post-open{color:var(--faith)}.faith-note{margin-top:20px;color:var(--dim);font-size:12px}.author{color:var(--faith)}
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}.about p{color:var(--dim)}footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding:32px 0 46px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}footer a{color:var(--ink);border-bottom:1px solid var(--accent)}
+    @media(max-width:820px){.hero{grid-template-columns:1fr;gap:32px;padding-top:48px}.about{grid-template-columns:1fr;gap:16px}.section-head{display:block}.section-head p{margin-top:12px}.post-card{grid-template-columns:1fr auto;gap:5px 12px}.post-meta{grid-column:1/3}.post-open{grid-column:2;grid-row:2}.post-content{grid-column:1;grid-row:2}}
+    @media(max-width:560px){.wrap{width:min(100% - 28px,1120px)}.site-nav{gap:10px 16px}.site-nav .spacer{display:none}.profile-body{padding:18px}.filters{gap:7px}.filter{padding:7px 10px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
   <div class="wrap">
     <nav class="site-nav" aria-label="Main navigation">
-      <a class="brand" href="#home">IBF / Blog</a>
-      <span class="spacer"></span>
-      <a href="#home">Home</a>
-      <a href="#blogs">Blogs</a>
-      <a href="#about">About</a>
-      <a href="#faith">Faith</a>
-      <a href="https://github.com/hakwell">GitHub</a>
+      <a class="brand" href="#home">IBF / Blog</a><span class="spacer"></span>
+      <a href="#home">Home</a><a href="#writeups">Writeups</a><a href="#faith">Christianity</a><a href="#about">About</a><a href="https://github.com/hakwell">GitHub</a>
     </nav>
-
     <main id="home">
       <section class="hero" aria-labelledby="hero-title">
-        <div>
-          <span class="eyebrow">Personal blog · Security · Faith</span>
+        <div><span class="eyebrow">Personal blog · Security · Faith</span>
           <h1 id="hero-title">Isezerano<br>Brice<span>Fiquerite</span></h1>
           <p class="lede"><strong>Cybersecurity professional and Christian.</strong> A personal space for sharing my learning, reflections, and writing across security and faith.</p>
           <div class="certs" aria-label="Certifications"><span>CRTA</span><span>AD-RTS</span><span>ISC2</span><span>CRTeamer</span></div>
         </div>
-
         <aside class="profile" aria-label="Profile card">
           <div class="profile-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>&nbsp; brice@blog: ~</span></div>
-          <div class="profile-body">
-            <p><span class="prompt">$ whoami</span></p>
-            <p>Isezerano Brice Fiquerite</p>
-            <p class="muted">Cybersecurity · Continuous learning</p>
-            <p><span class="prompt">$ values</span></p>
-            <p>Faith, integrity, curiosity, and service.</p>
-            <p><span class="prompt">$ explore</span></p>
-            <p><a href="#blogs">Browse the blog sections ↓</a></p>
-          </div>
+          <div class="profile-body"><p><span class="prompt">$ whoami</span></p><p>Isezerano Brice Fiquerite</p><p class="muted">Cybersecurity · Continuous learning</p><p><span class="prompt">$ values</span></p><p>Faith, integrity, curiosity, and service.</p><p><span class="prompt">$ explore</span></p><p><a href="#writeups">Browse writeups ↓</a></p></div>
         </aside>
       </section>
 
-      <section id="blogs" aria-labelledby="blogs-title">
-        <div class="section-head">
-          <div><span class="eyebrow">Writing</span><h2 id="blogs-title">Two sides of my journey</h2></div>
-          <p>Separate spaces for my cybersecurity writing and Christianity blog. I’ll add my own articles and posts here.</p>
+      <section id="writeups" aria-labelledby="writeups-title">
+        <div class="section-head"><div><span class="eyebrow">Cybersecurity</span><h2 id="writeups-title">Writeups & labs</h2></div><p>Markdown writeups appear here automatically. Choose a platform to filter, then open a title to read the full article in the same site style.</p></div>
+        <div class="filters" role="group" aria-label="Filter writeups by platform">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" type="button" data-filter="hackthebox" aria-pressed="false">HackTheBox</button>
+          <button class="filter" type="button" data-filter="offsec-labs" aria-pressed="false">OffSec Labs</button>
+          <button class="filter" type="button" data-filter="tryhackme" aria-pressed="false">TryHackMe</button>
+          <button class="filter" type="button" data-filter="hacksmarter" aria-pressed="false">HackSmarter</button>
+          <button class="filter" type="button" data-filter="tracehunt" aria-pressed="false">Tracehunt</button>
         </div>
-        <div class="blog-grid">
-          <a class="blog-card" href="#cybersecurity" aria-label="Cybersecurity blog section">
-            <span class="number">01 / SECURITY</span>
-            <h3>Cybersecurity Blog</h3>
-            <p>Notes, articles, and reflections on cybersecurity and professional learning.</p>
-            <span class="empty">Article space — I’ll add my posts here.</span>
+        <p class="result-count" id="writeup-count" aria-live="polite"></p>
+        <div class="post-list" id="writeup-list">
+          {% assign writeups = site.writeups | sort: 'date' | reverse %}
+          {% for post in writeups %}
+          <a class="post-card writeup-entry" data-platform="{{ post.platform | slugify }}" href="{{ post.url | relative_url }}">
+            <div class="post-meta"><span class="post-platform">{{ post.platform }}</span>{% if post.date %} · {{ post.date | date: "%b %d, %Y" }}{% endif %}</div>
+            <div class="post-content"><h3 class="post-title">{{ post.title }}</h3>{% if post.excerpt %}<p class="post-excerpt">{{ post.excerpt | strip_html | strip_newlines }}</p>{% endif %}</div>
+            <span class="post-open">Read writeup →</span>
           </a>
-          <a class="blog-card faith" href="#faith" aria-label="Christianity blog section">
-            <span class="number">02 / FAITH</span>
-            <h3>Christianity Blog</h3>
-            <p>Reflections on Christian faith, scripture, and living with purpose.</p>
-            <span class="empty">Article space — I’ll add my posts here.</span>
-          </a>
+          {% endfor %}
+          <div class="empty-state" id="writeup-empty">No writeups yet. Add a Markdown file to <code>_writeups/</code> to have it appear here.</div>
+          <div class="empty-state" id="filter-empty" hidden>No writeups in this platform yet.</div>
         </div>
       </section>
 
-      <section id="about" aria-labelledby="about-title">
-        <div class="about">
-          <div>
-            <span class="eyebrow">About</span>
-            <h2 id="about-title">Learning with purpose.</h2>
-            <p>I’m Isezerano Brice Fiquerite. This blog brings together two important parts of my life: cybersecurity and my Christian faith. I’ll use it to share my own writing and ideas as I continue learning.</p>
-            <p>My certifications include CRTA, AD-RTS, ISC2, and CRTeamer.</p>
+      <section id="faith" aria-labelledby="faith-title">
+        <div class="faith-panel">
+          <div class="section-head"><div><span class="eyebrow">Faith & Christianity</span><h2 id="faith-title">Christianity blog</h2></div><p>Reflections, encouragement, scripture, and stories shared by me or by people I know—with their permission.</p></div>
+          <div class="post-list" id="faith-list">
+            {% assign faith_posts = site.faith | sort: 'date' | reverse %}
+            {% for post in faith_posts %}
+            <a class="post-card faith-entry" href="{{ post.url | relative_url }}">
+              <div class="post-meta">{% if post.author %}<span class="author">{{ post.author }}</span>{% else %}<span class="author">Isezerano Brice Fiquerite</span>{% endif %}{% if post.date %} · {{ post.date | date: "%b %d, %Y" }}{% endif %}</div>
+              <div class="post-content"><h3 class="post-title">{{ post.title }}</h3>{% if post.excerpt %}<p class="post-excerpt">{{ post.excerpt | strip_html | strip_newlines }}</p>{% endif %}</div>
+              <span class="post-open">Read reflection →</span>
+            </a>
+            {% endfor %}
+            <div class="empty-state" id="faith-empty">No faith posts yet. Add a Markdown file to <code>_faith/</code> when you’re ready.</div>
           </div>
-          <div class="faith-note" id="faith">
-            <h3>Faith is part of my story.</h3>
-            <p>I’m a Christian, and I want this site to have a dedicated place for reflections about faith and Christianity. This section is ready for the writing I’ll add.</p>
-          </div>
+          <p class="faith-note">Guest contributions should only be published with the writer’s clear permission and approval of the version shared here.</p>
         </div>
       </section>
 
-      <section id="cybersecurity" aria-label="Cybersecurity writing section"></section>
+      <section id="about" aria-labelledby="about-title"><div class="about"><div><span class="eyebrow">About</span><h2 id="about-title">Learning with purpose.</h2><p>I’m Isezerano Brice Fiquerite. This blog brings together two important parts of my life: cybersecurity and my Christian faith. I’ll use it to share my own writing and, where permission is given, contributions from people I know.</p><p>My certifications include CRTA, AD-RTS, ISC2, and CRTeamer.</p></div><div><span class="eyebrow">Portable writing</span><h2>Markdown first.</h2><p>Writeups and faith articles are Markdown files. Add a short metadata header, place each file in its collection folder, and Jekyll builds a full article page that uses this site’s colors and typography.</p><p><a href="/WRITEUPS.md">Read the Markdown import guide →</a></p></div></div></section>
     </main>
-
-    <footer>
-      <span>© 2026 Isezerano Brice Fiquerite</span>
-      <span><a href="https://github.com/hakwell">GitHub</a></span>
-    </footer>
+    <footer><span>© 2026 Isezerano Brice Fiquerite</span><span><a href="https://github.com/hakwell">GitHub</a></span></footer>
   </div>
+  <script>
+    (() => {
+      const entries = [...document.querySelectorAll('.writeup-entry')];
+      const buttons = [...document.querySelectorAll('.filter')];
+      const empty = document.getElementById('writeup-empty');
+      const filteredEmpty = document.getElementById('filter-empty');
+      const count = document.getElementById('writeup-count');
+      const faithEmpty = document.getElementById('faith-empty');
+      faithEmpty.hidden = document.querySelectorAll('.faith-entry').length > 0;
+      function filterPosts(value) {
+        let visible = 0;
+        entries.forEach(entry => {
+          const show = value === 'all' || entry.dataset.platform === value;
+          entry.hidden = !show;
+          if (show) visible += 1;
+        });
+        empty.hidden = entries.length > 0;
+        filteredEmpty.hidden = entries.length === 0 || visible !== 0 || value === 'all';
+        count.textContent = `${visible} ${visible === 1 ? 'writeup' : 'writeups'}${value === 'all' ? ' total' : ` in ${buttons.find(button => button.dataset.filter === value).textContent}`}`;
+      }
+      buttons.forEach(button => button.addEventListener('click', () => {
+        buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        filterPosts(button.dataset.filter);
+      }));
+      filterPosts('all');
+    })();
+  </script>
 </body>
 </html>

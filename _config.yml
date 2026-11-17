@@ -1,72 +1,22 @@
-# Site Configuration
-title: "Isezerano Brice Fiquerite | Blog"
-description: "Personal writing on cybersecurity, Christian faith, and learning."
-author: "Isezerano Brice Fiquerite"
-url: "https://hakwell.github.io"
-baseurl: ""
-
-# Build settings
-markdown: kramdown
-highlighter: rouge
-theme: minima
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
-  - jekyll-seo-tag
-
-# Collections
 collections:
-  posts:
+  writeups:
     output: true
-    permalink: /:collection/:name/
+    permalink: /writeups/:name/
+  faith:
+    output: true
+    permalink: /faith/:name/
 
-# Defaults
+# Override the default layout for each Markdown collection.
 defaults:
   - scope:
       path: ""
-      type: "posts"
+      type: "writeups"
     values:
-      layout: "post"
+      layout: article
       author: "Isezerano Brice Fiquerite"
-
-# Navigation
-navigation:
-  - title: "Home"
-    url: "/"
-  - title: "Cybersecurity Blog"
-    url: "/#cybersecurity"
-  - title: "Christianity Blog"
-    url: "/#faith"
-  - title: "About"
-    url: "/#about"
-
-# Social links
-social:
-  - name: "GitHub"
-    url: "https://github.com/hakwell"
-
-# Exclude from processing
-exclude:
-  - README.md
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor/bundle/
-  - vendor/cache/
-  - vendor/gems/
-  - vendor/ruby/
-
-# Include in processing
-include:
-  - _pages
-
-# Kramdown configuration
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    css_class: 'highlight'
-    span:
-      line_numbers: false
-    block:
-      line_numbers: false
+  - scope:
+      path: ""
+      type: "faith"
+    values:
+      layout: article
+      author: "Isezerano Brice Fiquerite"
