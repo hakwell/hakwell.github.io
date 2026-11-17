@@ -489,7 +489,7 @@ Info: Establishing connection to remote endpoint
 
 ## From l.wilson.adm to RODC01
 
-![image.png](image.png)
+![Bloodhound path from l.wilson.adm to RODC01]({{ '/assets/images/garfieldhtb/image.png' | relative_url }})
 
 ### Lateral Movement
 
