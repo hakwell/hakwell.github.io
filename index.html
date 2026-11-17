@@ -3,305 +3,497 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101510">
-  <meta name="description" content="Security writeups, lab notes, and field notes from HackWell.">
-  <title>HackWell — Security notes &amp; writeups</title>
+  <meta name="description" content="HackWell personal blog for security notes, learning, certifications, and reflections.">
+  <title>HackWell | Security Notes & Writing</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #101510;
-      --surface: #171e18;
-      --surface-raised: #1c261e;
-      --text: #edf2e9;
-      --muted: #a4afa2;
-      --line: #2b382c;
-      --accent: #b7f36b;
-      --accent-dark: #16220e;
-      --max-width: 1080px;
+      --bg: #0d1117;
+      --bg-elevated: #111827;
+      --panel: #141d2b;
+      --panel-strong: #1a2435;
+      --card: #111b29;
+      --text: #edf3f5;
+      --muted: #a7b3be;
+      --line: rgba(159, 214, 255, 0.18);
+      --accent: #8be9fd;
+      --accent-strong: #66d9ef;
+      --accent-soft: rgba(102, 217, 239, 0.12);
+      --highlight: #c8ff9d;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: var(--bg);
+      font-family: Inter, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(102, 217, 239, 0.10), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(200, 255, 157, 0.06), transparent 30%),
+        var(--bg);
       color: var(--text);
-      font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
     }
     a { color: inherit; }
-    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-    .skip-link {
-      position: absolute;
-      top: -4rem;
-      left: 1rem;
-      z-index: 10;
-      padding: .7rem 1rem;
-      background: var(--accent);
-      color: var(--accent-dark);
+    img { max-width: 100%; }
+
+    .wrap {
+      width: min(1100px, calc(100% - 2rem));
+      margin: 0 auto;
     }
-    .skip-link:focus { top: 1rem; }
-    .wrap { width: min(var(--max-width), calc(100% - 3rem)); margin-inline: auto; }
 
     .site-header {
       position: sticky;
-      z-index: 5;
       top: 0;
-      border-bottom: 1px solid rgba(183, 243, 107, .12);
-      background: rgba(16, 21, 16, .92);
+      z-index: 10;
       backdrop-filter: blur(14px);
+      background: rgba(13, 17, 23, 0.8);
+      border-bottom: 1px solid var(--line);
     }
+
     .header-inner {
-      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 2rem;
+      gap: 1.5rem;
+      min-height: 72px;
     }
-    .brand {
-      color: var(--accent);
-      font-size: 1.15rem;
-      font-weight: 750;
-      letter-spacing: -.04em;
-      text-decoration: none;
-    }
-    .brand span { color: var(--text); }
-    nav { display: flex; align-items: center; gap: 1.7rem; }
-    nav a {
-      color: var(--muted);
-      font-size: .91rem;
-      text-decoration: none;
-      transition: color .2s ease;
-    }
-    nav a:hover, nav a:focus-visible { color: var(--accent); }
-    nav .nav-cta {
-      padding: .55rem .9rem;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      color: var(--text);
-    }
-    nav .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
 
-    .hero { padding: clamp(5rem, 11vw, 8.5rem) 0 5.5rem; }
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      color: var(--highlight);
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--accent);
+    }
+
+    .nav .nav-button {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.6rem 0.9rem;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .hero {
+      padding: 4.5rem 0 3rem;
+    }
+
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: .6rem;
+      gap: 0.75rem;
       color: var(--accent);
-      font-size: .78rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: .13em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
-    .eyebrow::before { width: 22px; height: 1px; background: currentColor; content: ""; }
-    h1, h2, h3, p { margin-top: 0; }
-    h1 {
-      max-width: 780px;
-      margin: 1.25rem 0 1.15rem;
-      font-size: clamp(3rem, 8vw, 6.4rem);
-      line-height: .99;
-      letter-spacing: -.075em;
+
+    .eyebrow::before {
+      content: "";
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--accent);
     }
-    h1 em { color: var(--accent); font-style: normal; }
-    .hero-copy { max-width: 620px; margin-bottom: 2rem; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.2rem); }
-    .actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin: 1rem 0 1rem;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+      max-width: 780px;
+    }
+
+    h1 .accent {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      margin-bottom: 2rem;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.25rem;
+    }
+
     .button {
       display: inline-flex;
-      min-height: 46px;
       align-items: center;
       justify-content: center;
-      gap: .5rem;
-      padding: .7rem 1rem;
+      gap: 0.5rem;
+      min-height: 46px;
+      padding: 0.75rem 1.05rem;
       border: 1px solid var(--line);
-      border-radius: 6px;
-      font-size: .92rem;
-      font-weight: 650;
+      border-radius: 8px;
+      font-weight: 700;
       text-decoration: none;
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
-    .button:hover { transform: translateY(-2px); border-color: var(--accent); }
-    .button-primary { border-color: var(--accent); background: var(--accent); color: var(--accent-dark); }
-    .button-primary:hover { background: #c8ff83; }
-    .button-arrow { color: var(--accent-dark); font-size: 1.15rem; line-height: 1; }
 
-    .intro-strip {
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(139, 233, 253, 0.5);
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: #06141a;
+      border-color: var(--accent);
+    }
+
+    .button-secondary {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .mini-banner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 2rem;
-      padding: 1.2rem 1.4rem;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
       border: 1px solid var(--line);
-      border-radius: 8px;
-      background: linear-gradient(110deg, rgba(183, 243, 107, .08), rgba(23, 30, 24, .65) 48%);
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(139, 233, 253, 0.06), rgba(200, 255, 157, 0.02));
     }
-    .intro-strip p { margin: 0; color: var(--muted); }
-    .intro-strip strong { color: var(--text); font-weight: 650; }
-    .status { display: flex; flex: 0 0 auto; align-items: center; gap: .55rem; color: var(--accent); font-size: .84rem; }
-    .status::before { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); content: ""; box-shadow: 0 0 12px rgba(183, 243, 107, .65); }
 
-    section { padding: 5rem 0; scroll-margin-top: 5rem; }
-    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; margin-bottom: 1.8rem; }
-    .section-heading h2 { margin: .55rem 0 0; font-size: clamp(1.8rem, 4vw, 2.5rem); letter-spacing: -.055em; }
-    .section-heading > p { max-width: 410px; margin: 0; color: var(--muted); }
-    .text-link { color: var(--accent); font-size: .92rem; font-weight: 650; text-decoration: none; white-space: nowrap; }
-    .text-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .mini-banner p {
+      margin: 0;
+      color: var(--muted);
+    }
 
-    .writing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-    .writing-card {
-      position: relative;
-      min-height: 230px;
+    .mini-banner strong {
+      color: var(--text);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--highlight);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--highlight);
+      box-shadow: 0 0 12px rgba(200, 255, 157, 0.8);
+    }
+
+    section {
+      padding: 4.5rem 0;
+      scroll-margin-top: 80px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading h2 {
+      margin: 0.5rem 0 0;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      letter-spacing: -0.06em;
+    }
+
+    .section-heading p {
+      max-width: 420px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
       display: flex;
       flex-direction: column;
+      min-height: 230px;
       padding: 1.5rem;
-      overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--surface);
+      border-radius: 14px;
+      background: rgba(20, 29, 40, 0.7);
       text-decoration: none;
-      transition: border-color .2s ease, transform .2s ease, background .2s ease;
-    }
-    .writing-card:hover { transform: translateY(-3px); border-color: rgba(183, 243, 107, .65); background: var(--surface-raised); }
-    .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.8rem; }
-    .card-icon {
-      display: grid;
-      width: 40px;
-      height: 40px;
-      place-items: center;
-      border: 1px solid rgba(183, 243, 107, .25);
-      border-radius: 6px;
-      color: var(--accent);
-      font-size: .85rem;
-      font-weight: 750;
-    }
-    .card-arrow { color: var(--muted); font-size: 1.2rem; transition: color .2s ease, transform .2s ease; }
-    .writing-card:hover .card-arrow { transform: translate(2px, -2px); color: var(--accent); }
-    .writing-card h3 { margin-bottom: .45rem; font-size: 1.24rem; letter-spacing: -.025em; }
-    .writing-card p { max-width: 420px; margin-bottom: 1.1rem; color: var(--muted); font-size: .94rem; }
-    .card-label { margin-top: auto; color: var(--accent); font-size: .78rem; font-weight: 650; letter-spacing: .04em; }
-
-    .about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 3rem; align-items: start; }
-    .about-copy { max-width: 630px; color: var(--muted); }
-    .about-copy p:last-child { margin-bottom: 0; }
-    .about-copy strong { color: var(--text); }
-    .credentials {
-      padding: 1.5rem;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--surface);
-    }
-    .credentials h3 { margin-bottom: .45rem; font-size: 1rem; }
-    .credentials p { margin-bottom: 1.1rem; color: var(--muted); font-size: .88rem; }
-    .badge-list { display: flex; flex-wrap: wrap; gap: .5rem; }
-    .badge {
-      padding: .4rem .65rem;
-      border: 1px solid rgba(183, 243, 107, .24);
-      border-radius: 5px;
-      background: rgba(183, 243, 107, .06);
-      color: var(--accent);
-      font-size: .82rem;
-      font-weight: 650;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
-    .contact-panel {
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(139, 233, 253, 0.5);
+      background: rgba(25, 35, 47, 0.85);
+    }
+
+    .card-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 2rem;
-      padding: clamp(1.5rem, 4vw, 2.5rem);
-      border: 1px solid rgba(183, 243, 107, .28);
-      border-radius: 8px;
-      background: radial-gradient(ellipse at 100% 0, rgba(183, 243, 107, .09), transparent 55%), var(--surface);
+      margin-bottom: 1.5rem;
     }
-    .contact-panel h2 { margin-bottom: .4rem; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.05em; }
-    .contact-panel p { margin-bottom: 0; color: var(--muted); }
-    .site-footer { padding: 1.7rem 0 2.2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
-    .footer-inner { display: flex; justify-content: space-between; gap: 1rem; }
-    .site-footer p { margin: 0; }
-    .site-footer a { color: var(--text); text-decoration: none; }
-    .site-footer a:hover { color: var(--accent); }
 
-    @media (max-width: 700px) {
-      .wrap { width: min(var(--max-width), calc(100% - 2rem)); }
-      .header-inner { min-height: 68px; gap: 1rem; }
-      nav { gap: .85rem; }
-      nav a { font-size: .82rem; }
-      nav a:nth-child(2) { display: none; }
-      nav .nav-cta { padding: .45rem .65rem; }
-      .hero { padding: 5rem 0 3.5rem; }
-      .intro-strip, .section-heading, .contact-panel { align-items: flex-start; flex-direction: column; }
-      section { padding: 3.7rem 0; }
-      .writing-grid, .about-grid { grid-template-columns: 1fr; }
-      .writing-card { min-height: 205px; }
-      .about-grid { gap: 1.5rem; }
-      .footer-inner { flex-direction: column; }
+    .icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid rgba(139, 233, 253, 0.28);
+      background: rgba(139, 233, 253, 0.08);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 0.8rem;
     }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+
+    .arrow {
+      color: var(--muted);
+      font-size: 1.25rem;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      flex: 1;
+    }
+
+    .tag {
+      color: var(--highlight);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .about-copy {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .about-copy strong {
+      color: var(--text);
+    }
+
+    .certs {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.3rem;
+      background: rgba(20, 29, 40, 0.75);
+    }
+
+    .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid rgba(139, 233, 253, 0.28);
+      border-radius: 999px;
+      background: rgba(139, 233, 253, 0.06);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .contact-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: clamp(1.5rem, 3vw, 2rem);
+      border: 1px solid rgba(139, 233, 253, 0.28);
+      border-radius: 16px;
+      background: radial-gradient(circle at top right, rgba(139, 233, 253, 0.08), transparent 35%), rgba(20, 29, 40, 0.75);
+    }
+
+    .contact-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .site-footer {
+      padding: 2rem 0 2.5rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer-inner a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 720px) {
+      .card-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading,
+      .contact-box,
+      .mini-banner,
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav {
+        gap: 0.8rem;
+      }
     }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#home">hackwell<span>.blog</span></a>
-      <nav aria-label="Main navigation">
+      <a href="#home" class="brand">hackwell</a>
+      <nav class="nav" aria-label="Main navigation">
         <a href="#writing">Writing</a>
         <a href="#about">About</a>
         <a href="#certifications">Certifications</a>
-        <a class="nav-cta" href="#contact">Get in touch</a>
+        <a href="#contact" class="nav-button">Get in touch</a>
       </nav>
     </div>
   </header>
 
-  <main id="main">
+  <main id="home">
     <div class="wrap">
-      <section class="hero" id="home" aria-labelledby="hero-title">
-        <span class="eyebrow">Security notes &amp; writeups</span>
-        <h1 id="hero-title">Learning by doing.<br><em>Sharing what I learn.</em></h1>
-        <p class="hero-copy">I'm Bruce, the person behind HackWell. This is where I document cybersecurity labs, challenge writeups, practical lessons, and things I discover along the way.</p>
+      <section class="hero" aria-labelledby="hero-title">
+        <span class="eyebrow">Security notes & writing</span>
+        <h1 id="hero-title">Learning in public.<br><span class="accent">Writing what matters.</span></h1>
+        <p class="hero-copy">This is my personal space for cybersecurity notes, learning reflections, practical lessons, and the work I want to keep organized and shareable.</p>
+
         <div class="actions">
-          <a class="button button-primary" href="#writing">Explore the writing <span class="button-arrow" aria-hidden="true">↗</span></a>
-          <a class="button" href="https://github.com/hackwell">Find me on GitHub</a>
+          <a href="#writing" class="button button-primary">Read the notes</a>
+          <a href="https://github.com/hakwell" class="button button-secondary">GitHub</a>
+        </div>
+
+        <div class="mini-banner" aria-label="Site focus">
+          <p><strong>Focus:</strong> practical security learning, research notes, and personal development.</p>
+          <span class="status">Always learning</span>
         </div>
       </section>
-
-      <div class="intro-strip" aria-label="Site focus">
-        <p><strong>Curious, hands-on security.</strong> Notes from the lab, written to be useful and easy to revisit.</p>
-        <span class="status">Always learning</span>
-      </div>
 
       <section id="writing" aria-labelledby="writing-title">
         <div class="section-heading">
           <div>
-            <span class="eyebrow">Browse the site</span>
-            <h2 id="writing-title">Writeups &amp; notes</h2>
+            <span class="eyebrow">The writing</span>
+            <h2 id="writing-title">Notes, articles, and reflections</h2>
           </div>
-          <p>Walkthroughs, lab notes, and articles organized by platform. New posts will live alongside these collections.</p>
+          <p>Short-form ideas, deeper notes, and ongoing learning work that is useful to revisit.</p>
         </div>
-        <div class="writing-grid">
-          <a class="writing-card" href="/posts/hackthebox/">
-            <div class="card-top"><span class="card-icon" aria-hidden="true">HTB</span><span class="card-arrow" aria-hidden="true">↗</span></div>
-            <h3>Hack The Box</h3>
-            <p>Machine and challenge writeups, with notes on the approach and what each lab taught me.</p>
-            <span class="card-label">Platform writeups</span>
+
+        <div class="card-grid">
+          <a class="card" href="/posts/learn-by-doing.md">
+            <div class="card-head">
+              <span class="icon">01</span>
+              <span class="arrow">→</span>
+            </div>
+            <h3>Learn by Doing</h3>
+            <p>Why I document my learning process, how I turn experiments into useful notes, and how that builds confidence over time.</p>
+            <span class="tag">Personal note</span>
           </a>
-          <a class="writing-card" href="/posts/tryhackme/">
-            <div class="card-top"><span class="card-icon" aria-hidden="true">THM</span><span class="card-arrow" aria-hidden="true">↗</span></div>
-            <h3>TryHackMe</h3>
-            <p>Room walkthroughs and learning notes from hands-on cybersecurity paths.</p>
-            <span class="card-label">Platform writeups</span>
+
+          <a class="card" href="/posts/security-ethics.md">
+            <div class="card-head">
+              <span class="icon">02</span>
+              <span class="arrow">→</span>
+            </div>
+            <h3>Ethics in Security</h3>
+            <p>How responsible practice, curiosity, and integrity shape the way I learn and work in cybersecurity.</p>
+            <span class="tag">Reflection</span>
           </a>
-          <a class="writing-card" href="/posts/offsec/">
-            <div class="card-top"><span class="card-icon" aria-hidden="true">OS</span><span class="card-arrow" aria-hidden="true">↗</span></div>
-            <h3>OffSec</h3>
-            <p>Practice-lab notes and reflections on building practical offensive security skills.</p>
-            <span class="card-label">Lab notes</span>
+
+          <a class="card" href="/posts/certification-notes.md">
+            <div class="card-head">
+              <span class="icon">03</span>
+              <span class="arrow">→</span>
+            </div>
+            <h3>Certification Notes</h3>
+            <p>Short lessons and study strategies for staying consistent, organized, and focused through learning milestones.</p>
+            <span class="tag">Learning</span>
           </a>
-          <a class="writing-card" href="/posts/">
-            <div class="card-top"><span class="card-icon" aria-hidden="true">✎</span><span class="card-arrow" aria-hidden="true">↗</span></div>
-            <h3>Articles &amp; field notes</h3>
-            <p>General security topics, tools, projects, and other ideas worth writing down.</p>
-            <span class="card-label">Read all posts</span>
+
+          <a class="card" href="/posts/knowledge-system.md">
+            <div class="card-head">
+              <span class="icon">04</span>
+              <span class="arrow">→</span>
+            </div>
+            <h3>Building a Knowledge System</h3>
+            <p>How I structure notes, track progress, and preserve useful technical knowledge so it is easier to revisit later.</p>
+            <span class="tag">Process</span>
           </a>
         </div>
       </section>
@@ -309,35 +501,40 @@
       <section id="about" aria-labelledby="about-title">
         <div class="section-heading">
           <div>
-            <span class="eyebrow">A little about me</span>
+            <span class="eyebrow">About</span>
             <h2 id="about-title">The person behind the notes</h2>
           </div>
         </div>
+
         <div class="about-grid">
           <div class="about-copy">
-            <p>I'm <strong>Bruce</strong>, a cybersecurity practitioner who enjoys learning through hands-on labs and sharing clear, practical writeups. HackWell is my personal notebook for the things I solve, study, build, and want to remember.</p>
-            <p>These posts are for learning and authorized practice. I aim to explain the process, capture useful takeaways, and keep improving with every writeup.</p>
+            <p>Hi, I’m <strong>Bruce</strong>. I’m building a personal space to document the things I learn, solve, and revisit in cybersecurity and technical work.</p>
+            <p>This blog is meant to be practical: useful notes, honest reflections, certification progress, and the kind of learning that turns theory into confidence. I write to clarify my thinking and keep the process visible.</p>
+            <p>It is a place for security notes, research habits, and technology learning that can be imported into Notion or reused anywhere else.</p>
           </div>
-          <aside class="credentials" id="certifications" aria-labelledby="credentials-title">
-            <h3 id="credentials-title">Certifications &amp; learning</h3>
-            <p>Credentials and learning areas featured on this site.</p>
-            <div class="badge-list" aria-label="Credentials">
+
+          <aside class="certs" id="certifications" aria-labelledby="cert-title">
+            <h3 id="cert-title">Certifications & focus</h3>
+            <p>Current focus areas and credentials associated with this work.</p>
+            <div class="badge-list" aria-label="Certification and focus badges">
               <span class="badge">CRTA</span>
               <span class="badge">CRT-AD</span>
               <span class="badge">ISC²</span>
+              <span class="badge">Cybersecurity</span>
+              <span class="badge">Research</span>
             </div>
           </aside>
         </div>
       </section>
 
       <section id="contact" aria-labelledby="contact-title">
-        <div class="contact-panel">
+        <div class="contact-box">
           <div>
-            <span class="eyebrow">Keep in touch</span>
-            <h2 id="contact-title">Have a question or idea?</h2>
-            <p>Feel free to connect, share feedback, or talk security and learning.</p>
+            <span class="eyebrow">Get in touch</span>
+            <h2 id="contact-title">Have a question, idea, or project to share?</h2>
+            <p>Feel free to connect and talk security, learning, and thoughtful engineering.</p>
           </div>
-          <a class="button button-primary" href="https://github.com/hackwell">Connect on GitHub <span class="button-arrow" aria-hidden="true">↗</span></a>
+          <a href="https://github.com/hakwell" class="button button-primary">Connect on GitHub</a>
         </div>
       </section>
     </div>
@@ -345,8 +542,8 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <p>© <span id="year">2026</span> HackWell · Built for curious minds.</p>
-      <p><a href="https://github.com/hackwell">GitHub</a> · <a href="https://linkedin.com/in/hackwell">LinkedIn</a></p>
+      <p>© 2026 HackWell · Built for learning and documentation.</p>
+      <p><a href="https://github.com/hakwell">GitHub</a> · <a href="https://linkedin.com/in/hackwell">LinkedIn</a></p>
     </div>
   </footer>
 </body>
