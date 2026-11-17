@@ -97,9 +97,9 @@ Nmap done: 1 IP address (1 host up) scanned in 20.77 seconds
 
 ```
 
-[image.png](https://github.com/hakwell/hakwell.github.io/blob/44ff859dbb34a5e2947c060a5acfd48916491f39/assets/images/editorhtb/image.png))
+Robots.txt on the wiki subdomain revealed that the application was running XWiki using Jetty on port 8080.
 
-Robots.txt on the wiki subdomain found through nmap running xwiki using jetty on port 8080
+![Xwiki web app](assets/images/editorhtb/image.png)
 
 ```jsx
 User-agent: *
