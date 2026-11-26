@@ -3,7 +3,7 @@ layout: article
 title: "Kitsune"
 date: 2026-11-26
 platform: "HackSmarter"
-excerpt: "Kitsune is an Easy Active Directory machine from HackSmarter that demonstrates guest share enumeration, password-safe cracking, ESC13 certificate abuse, BloodHound lateral movement, GMSA password retrieval, and domain compromise."
+excerpt: "Kitsune is an Easy Active Directory machine from HackSmarter that demonstrates guest share enumeration, password-safe cracking, ESC13 certificate abuse, BloodHound lateral movement, GMSA pas[...]
 ---
 
 # Kitsune
@@ -100,7 +100,7 @@ I initially focused on `ross` and tested for password reuse and username-as-pass
 
 ![Testing credentials against domain users]({{ '/assets/images/kitsune/image%202.png' | relative_url }})
 
-None of the enumerated users appeared kerberoastable or reused their username as a password. However, the `Guest` account was configured with the password `[REDACTED]`, and it could be used to enumerate accessible SMB shares.
+None of the enumerated users appeared kerberoastable or reused their username as a password. However, the `Guest` account was configured with the password `[REDACTED]`, and it could be used to enumera[...]
 
 # Enumerating Shares with enum4linux
 
@@ -204,7 +204,7 @@ The output identified:
 - Template: `Kitsune-User`
 - Vulnerability: ESC13
 
-The template allowed client authentication and had an issuance policy linked to the `HelpDesk` group. It was available to `Domain Users`, did not require manager approval, and did not require an authorized signature.
+The template allowed client authentication and had an issuance policy linked to the `HelpDesk` group. It was available to `Domain Users`, did not require manager approval, and did not require an autho[...]
 
 # Exploiting ESC13
 
@@ -399,3 +399,36 @@ HSM{[REDACTED]}
 1. This machine was suitable for a beginner penetration tester because it introduced a clear chain of Active Directory weaknesses.
 2. It required looking beyond a straightforward credential path, particularly for ESC13 abuse and DPAPI credential recovery.
 3. It is a useful machine for beginning Active Directory penetration testing or red-team practice.
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const content = document.getElementById('article-content');
+    const toc = document.querySelector('#article-toc ul');
+    if (!content || !toc) return;
+
+    const articleTitle = document.querySelector('.article > h1')?.textContent.trim();
+    const headings = [...content.querySelectorAll('h1, h2, h3')]
+      .filter((heading) => !(heading.tagName === 'H1' && heading.textContent.trim() === articleTitle));
+    const used = new Set();
+    toc.replaceChildren();
+
+    headings.forEach((heading) => {
+      const label = heading.textContent.trim();
+      if (!label) return;
+      let id = heading.id || label.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-') || 'section';
+      const base = id;
+      let suffix = 2;
+      while (used.has(id)) id = `${base}-${suffix++}`;
+      used.add(id);
+      heading.id = id;
+
+      const item = document.createElement('li');
+      if (heading.tagName === 'H3') item.className = 'toc-sub';
+      const link = document.createElement('a');
+      link.href = `#${id}`;
+      link.textContent = label;
+      item.append(link);
+      toc.append(item);
+    });
+  });
+</script>
