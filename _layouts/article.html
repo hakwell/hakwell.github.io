@@ -9,20 +9,78 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{color-scheme:dark;--bg:#0d0f1a;--panel:#151829;--ink:#e9e6dc;--dim:#a0a4b8;--accent:#a99aff;--warm:#ff9a79;--line:#292d45;--faith:#c8a9ff;font-family:"IBM Plex Mono",ui-monospace,monospace}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.8}a{color:var(--accent)}a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}.wrap{width:min(900px,calc(100% - 40px));margin:auto}.nav{display:flex;gap:20px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line);font-size:13px}.nav a{text-decoration:none}.brand{margin-right:auto;color:var(--ink);font:800 17px Syne,sans-serif}.article{margin:54px 0 72px;padding:clamp(22px,5vw,54px);border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:0 0 0 6px rgb(169 154 255 / 5%)}.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.13em;text-transform:uppercase}.meta{color:var(--dim);font-size:12px;margin:12px 0 28px}.meta .platform{color:var(--warm)}h1,h2,h3{font-family:Syne,sans-serif;line-height:1.2}h1{font-size:clamp(36px,7vw,64px);letter-spacing:-.04em;margin:12px 0}h2{margin-top:2em;color:var(--accent);font-size:clamp(24px,4vw,34px)}h3{margin-top:1.7em;color:var(--warm);font-size:22px}p,li{color:var(--ink)}blockquote{margin:1.5em 0;padding:4px 18px;border-left:3px solid var(--faith);color:var(--dim);background:rgb(200 169 255 / 5%)}code{padding:.15em .4em;border:1px solid var(--line);border-radius:4px;background:#0d0f1a;color:var(--warm);font-size:.9em}pre{overflow:auto;padding:18px;border:1px solid var(--line);border-radius:8px;background:#0d0f1a}pre code{padding:0;border:0;background:none;color:var(--ink)}img{max-width:100%;height:auto;border-radius:8px}hr{border:0;border-top:1px solid var(--line);margin:2em 0}.back{display:inline-block;margin-top:28px;text-decoration:none;color:var(--accent)}footer{padding:24px 0 40px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}@media(max-width:560px){.wrap{width:calc(100% - 28px)}.nav{gap:12px;flex-wrap:wrap}.article{margin:30px 0 48px}}
+    :root{color-scheme:dark;--bg:#0d0f1a;--panel:#151829;--ink:#e9e6dc;--dim:#a0a4b8;--accent:#a99aff;--warm:#ff9a79;--line:#292d45;--faith:#c8a9ff;font-family:"IBM Plex Mono",ui-monospace,monospace}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.8}a{color:var(--accent)}a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}.wrap{width:min(1200px,calc(100% - 40px));margin:auto}.nav{display:flex;gap:20px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line);font-size:13px}.nav a{text-decoration:none}.brand{margin-right:auto;color:var(--ink);font:800 17px Syne,sans-serif}.article{margin:54px 0 72px;padding:clamp(22px,5vw,54px);border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:0 0 0 6px rgb(169 154 255 / 5%)}.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.13em;text-transform:uppercase}.meta{color:var(--dim);font-size:12px;margin:12px 0 28px}.platform{color:var(--warm)}h1,h2,h3{font-family:Syne,sans-serif;line-height:1.2}h1{font-size:clamp(36px,7vw,64px);letter-spacing:-.04em;margin:12px 0}h2{font-size:clamp(24px,4vw,34px);color:var(--accent);margin-top:2em}h3{font-size:22px;color:var(--warm);margin-top:1.7em}p,li{color:var(--ink)}blockquote{margin:1.5em 0;padding:4px 18px;border-left:3px solid var(--faith);color:var(--dim);background:rgb(200 169 255 / 5%)}code{padding:.15em .4em;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--warm);font-size:.9em}pre{overflow:auto;padding:18px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}pre code{padding:0;border:0;background:none;color:var(--ink)}img{display:block;max-width:100%;height:auto;margin:20px auto;border-radius:8px}hr{border:0;border-top:1px solid var(--line);margin:2em 0}.back{display:inline-block;margin-top:28px;text-decoration:none}.article-columns{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:38px;align-items:start}.article-content{min-width:0}.article-toc{position:sticky;top:24px;max-height:calc(100vh - 48px);overflow:auto;padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}.article-toc h2{margin:0 0 12px;color:var(--ink);font:700 14px Syne,sans-serif}.article-toc ul{list-style:none;padding:0;margin:0}.article-toc li{margin:7px 0;line-height:1.4}.article-toc li.toc-sub{padding-left:12px}.article-toc a{font-size:11px;text-decoration:none;color:var(--dim)}.article-toc a:hover,.article-toc a:focus{color:var(--accent)}.article-toc[hidden]{display:none}.image-unavailable{display:block;max-width:100%;margin:20px auto;padding:24px;border:1px dashed var(--line);border-radius:8px;color:var(--dim);text-align:center;font-size:13px}footer{padding:24px 0 40px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
+    @media(max-width:850px){.article-columns{grid-template-columns:minmax(0,1fr) 190px;gap:22px}.article{margin:30px 0 48px}}
+    @media(max-width:640px){.wrap{width:min(100% - 24px,800px)}.nav{gap:12px;font-size:11px}.article-columns{display:flex;flex-direction:column}.article-toc{position:static;order:-1;width:100%;max-height:260px}.article{margin:20px 0 36px;padding:22px}.article-toc a{font-size:12px}}
   </style>
 </head>
 <body>
   <div class="wrap">
     <nav class="nav" aria-label="Article navigation"><a class="brand" href="{{ '/' | relative_url }}">IBF / Blog</a><a href="{{ '/' | relative_url }}#writeups">Writeups</a><a href="{{ '/' | relative_url }}#faith">Christianity</a></nav>
     <main class="article">
-      {% if page.platform %}<span class="eyebrow">{{ page.platform }}</span>{% else %}<span class="eyebrow">Christianity & faith</span>{% endif %}
+      {% if page.platform %}<span class="eyebrow">{{ page.platform }}</span>{% else %}<span class="eyebrow">Christianity &amp; faith</span>{% endif %}
       <h1>{{ page.title }}</h1>
       <div class="meta">{% if page.author %}{{ page.author }} · {% endif %}{% if page.date %}{{ page.date | date: "%b %d, %Y" }}{% endif %}{% if page.platform %} · <span class="platform">{{ page.platform }}</span>{% endif %}</div>
-      {{ content }}
+      <div class="article-columns">
+        <div class="article-content" id="article-content">{{ content }}</div>
+        {% if page.platform %}<aside class="article-toc" id="article-toc" aria-label="Table of contents"><h2>On this page</h2><ul></ul></aside>{% endif %}
+      </div>
       <a class="back" href="{{ '/' | relative_url }}{% if page.platform %}#writeups{% else %}#faith{% endif %}">← Back to {% if page.platform %}writeups{% else %}Christianity blog{% endif %}</a>
     </main>
     <footer>© 2026 Isezerano Brice Fiquerite</footer>
   </div>
+  {% if page.platform %}
+  <script>
+    (() => {
+      const content = document.getElementById('article-content');
+      const toc = document.querySelector('#article-toc ul');
+      if (!content || !toc) return;
+
+      // Hide any hand-written TOC in the article; the sidebar is generated from headings.
+      const oldTocHeading = [...content.querySelectorAll('h2,h3')].find((heading) => heading.textContent.trim().toLowerCase() === 'table of contents');
+      if (oldTocHeading) {
+        let node = oldTocHeading.nextElementSibling;
+        oldTocHeading.remove();
+        while (node && !/^H[1-3]$/.test(node.tagName)) {
+          const next = node.nextElementSibling;
+          node.remove();
+          node = next;
+        }
+      }
+
+      const slug = (text) => text.trim().toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+      const used = new Set();
+      content.querySelectorAll('h2,h3').forEach((heading) => {
+        const label = heading.textContent.trim();
+        if (!label) return;
+        let id = heading.id || slug(label) || 'section';
+        let base = id;
+        let suffix = 2;
+        while (used.has(id)) id = `${base}-${suffix++}`;
+        used.add(id);
+        heading.id = id;
+        const item = document.createElement('li');
+        if (heading.tagName === 'H3') item.className = 'toc-sub';
+        const link = document.createElement('a');
+        link.href = `#${id}`;
+        link.textContent = label;
+        item.append(link);
+        toc.append(item);
+      });
+      if (!toc.children.length) document.getElementById('article-toc').hidden = true;
+
+      content.querySelectorAll('img').forEach((image) => {
+        image.addEventListener('error', () => {
+          const notice = document.createElement('span');
+          notice.className = 'image-unavailable';
+          notice.setAttribute('role', 'img');
+          notice.textContent = `${image.alt || 'Image'} — image file is missing from the site assets.`;
+          image.replaceWith(notice);
+        }, { once: true });
+      });
+    })();
+  </script>
+  {% endif %}
 </body>
 </html>
