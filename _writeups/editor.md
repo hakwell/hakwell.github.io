@@ -192,7 +192,7 @@ linpeas.sh  xwiki-8080.lck
 
 ```jsx
 User: oliver
-Pass: 'theEd1t0rTeam99'
+Pass: '[REDACTED]'
 ```
 
 ## Foothold:
@@ -206,7 +206,7 @@ This host key is known by the following other names/addresses:
     ~/.ssh/known_hosts:1: [hashed name]
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 Warning: Permanently added 'editor.htb' (ED25519) to the list of known hosts.
-oliver@editor.htb's password: "theEd1t0rTeam99"
+oliver@editor.htb's password: "[REDACTED]"
 Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-151-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
